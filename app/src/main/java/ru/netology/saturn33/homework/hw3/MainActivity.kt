@@ -1,10 +1,10 @@
-package ru.netology.homework.hw3
+package ru.netology.saturn33.homework.hw3
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
-import ru.netology.homework.hw3.dto.Post
+import ru.netology.saturn33.homework.hw3.dto.Post
 import java.util.Date
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package ru.netology.homework.hw3.dto
+package ru.netology.saturn33.homework.hw3.dto
 
 class Post(
     val id: Long,

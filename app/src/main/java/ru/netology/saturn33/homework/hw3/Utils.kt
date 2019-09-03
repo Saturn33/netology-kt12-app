@@ -1,4 +1,4 @@
-package ru.netology.homework.hw3
+package ru.netology.saturn33.homework.hw3
 
 object Utils {
     const val SECOND = 1L
