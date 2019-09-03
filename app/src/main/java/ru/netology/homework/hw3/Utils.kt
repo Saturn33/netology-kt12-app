@@ -22,7 +22,7 @@ object Utils {
         }
     }
 
-    fun declOfNum(number: Int, titles: Array<String>): String {
+    private fun declOfNum(number: Int, titles: Array<String>): String {
         val cases = arrayOf(2, 0, 1, 1, 1, 2)
         return titles[if (number % 100 in 5..19) 2 else cases[if (number % 10 < 5) number % 10 else 5]]
     }
