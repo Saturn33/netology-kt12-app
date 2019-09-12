@@ -66,6 +66,19 @@
             tools:text="content" />
 
         <ImageButton
+            android:id="@+id/imgLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/mid_margin"
+            android:layout_marginEnd="@dimen/mid_margin"
+            android:background="#ffffff"
+            android:src="@drawable/ic_location_on_black_24dp"
+            app:layout_goneMarginEnd="@dimen/huge_margin"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@id/imgLike"
+            app:layout_constraintTop_toBottomOf="@id/content" />
+
+        <ImageButton
             android:id="@+id/imgLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

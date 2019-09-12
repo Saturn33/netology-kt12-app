@@ -1,6 +1,6 @@
 package ru.netology.saturn33.homework.hw4.dto
 
-class Post(
+open class Post(
     val id: Long,
     val author: String,
     val created: Long,
