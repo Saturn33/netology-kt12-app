@@ -73,13 +73,14 @@
             android:layout_marginEnd="@dimen/mid_margin"
             android:background="#ffffff"
             android:src="@drawable/ic_like_inactive_24dp"
-            app:layout_goneMarginEnd="@dimen/large_and_mid_margin"
+            app:layout_goneMarginEnd="@dimen/huge_margin"
             app:layout_constraintEnd_toStartOf="@id/txtLike"
             app:layout_constraintTop_toBottomOf="@id/content" />
 
         <TextView
             android:id="@+id/txtLike"
             android:layout_width="wrap_content"
+            android:minWidth="@dimen/mid_margin"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/mid_margin"
             android:layout_marginEnd="@dimen/large_margin"

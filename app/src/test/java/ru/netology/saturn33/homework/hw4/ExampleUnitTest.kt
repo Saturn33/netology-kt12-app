@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw3
+package ru.netology.saturn33.homework.hw4
 
 import org.junit.Test
 
