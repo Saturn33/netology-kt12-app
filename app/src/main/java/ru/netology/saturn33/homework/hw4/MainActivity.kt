@@ -8,9 +8,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
-import ru.netology.saturn33.homework.hw4.dto.Event
-import ru.netology.saturn33.homework.hw4.dto.Location
-import ru.netology.saturn33.homework.hw4.dto.Post
+import ru.netology.saturn33.homework.hw4.dto.*
 import java.util.Date
 
 class MainActivity : AppCompatActivity() {
@@ -20,11 +18,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val now = Date().time
+        val media = listOf(Video(
+            22,
+            "https://www.youtube.com/watch?v=G9VrVUoQ0j8",
+            "ANDROID 10 is Here!",
+            2200,
+            916
+        ))
         val post = Event(
             1,
             "ЯЧеловекСОченьДлиннымЛогиномВозможноЭтоЕщёНеВсё",
             now - 8 * Intervals.HOUR.seconds,
             "Мой первый достаточно длинный и информативный пост в ещё не существующей соцсети.",
+            media,
             "Офис Нетологии", Location(55.7039398,37.6240304,17),
             1, true,
             3, true,
@@ -56,6 +62,32 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        if (!post.media.isNullOrEmpty())
+        {
+            val first = post.media.first()
+            when (first)
+            {
+                is Image -> {
+                    TODO("отобразить картинку")
+                }
+                is Video -> {
+                    with (contentMedia) {
+                        setImageResource(R.drawable.ic_play_video)
+                        visibility = View.VISIBLE
+                        setOnClickListener {
+                            val intent = Intent().apply {
+                                action = Intent.ACTION_VIEW
+                                data = Uri.parse(first.url)
+                            }
+                            startActivity(intent)
+                        }
+                    }
+                }
+                else -> {
+                    contentMedia.visibility = View.GONE
+                }
+            }
+        }
         imgLike.setOnClickListener {
             post.likedByMe = !post.likedByMe
             post.likes += if (post.likedByMe) 1 else -1

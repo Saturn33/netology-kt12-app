@@ -5,6 +5,7 @@ open class Post(
     val author: String,
     val created: Long,
     val content: String,
+    val media: List<Media>?,
     var likes: Int = 0,
     var likedByMe: Boolean = false,
     var comments: Int = 0,
