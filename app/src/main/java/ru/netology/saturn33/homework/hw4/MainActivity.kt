@@ -50,22 +50,22 @@ class MainActivity : AppCompatActivity() {
         updateInfo(imgShare, txtShare, post.sharedByMe, post.shares,
             R.drawable.ic_share_active_24dp, R.drawable.ic_share_inactive_24dp)
 
-        if (post is Event) {
+        if (post is Event) {//да, судя по коду, оно всегда true но если вдруг post прилетит типа Post, то должно оградить от ненужного поведения
             //отображение изображения с локацией и установка интента на открытие карты
             imgLocation.visibility = View.VISIBLE
             imgLocation.setOnClickListener {
-                val intent = Intent().apply {
+                Intent().apply {
                     action = Intent.ACTION_VIEW
                     data = Uri.parse("geo:${post.location.lat},${post.location.lng}?z=${post.location.zoom}")
+                }.also {
+                    startActivity(it)
                 }
-                startActivity(intent)
             }
         }
 
         if (!post.media.isNullOrEmpty())
         {
-            val first = post.media.first()
-            when (first)
+            when (val first = post.media.first())
             {
                 is Image -> {
                     TODO("отобразить картинку")
@@ -75,11 +75,12 @@ class MainActivity : AppCompatActivity() {
                         setImageResource(R.drawable.ic_play_video)
                         visibility = View.VISIBLE
                         setOnClickListener {
-                            val intent = Intent().apply {
+                            Intent().apply {
                                 action = Intent.ACTION_VIEW
                                 data = Uri.parse(first.url)
+                            }.also {
+                                startActivity(it)
                             }
-                            startActivity(intent)
                         }
                     }
                 }
