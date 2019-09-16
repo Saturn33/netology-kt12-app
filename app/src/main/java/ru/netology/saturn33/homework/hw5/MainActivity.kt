@@ -18,20 +18,22 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val now = Date().time
-        val media = listOf(Video(
-            22,
-            "https://www.youtube.com/watch?v=G9VrVUoQ0j8",
-            "ANDROID 10 is Here!",
-            2200,
-            916
-        ))
+        val media = listOf(
+            Video(
+                22,
+                "https://www.youtube.com/watch?v=G9VrVUoQ0j8",
+                "ANDROID 10 is Here!",
+                2200,
+                916
+            )
+        )
         val post = Event(
             1,
             "ЯЧеловекСОченьДлиннымЛогиномВозможноЭтоЕщёНеВсё",
             now - 8 * Intervals.HOUR.seconds,
             "Мой первый достаточно длинный и информативный пост в ещё не существующей соцсети.",
             media,
-            "Офис Нетологии", Location(55.7039398,37.6240304,17),
+            "Офис Нетологии", Location(55.7039398, 37.6240304, 17),
             1, true,
             3, true,
             100, false
@@ -41,14 +43,20 @@ class MainActivity : AppCompatActivity() {
         author.text = post.author
         content.text = post.content
 
-        updateInfo(imgLike, txtLike, post.likedByMe, post.likes,
-            R.drawable.ic_like_active_24dp, R.drawable.ic_like_inactive_24dp)
+        updateInfo(
+            imgLike, txtLike, post.likedByMe, post.likes,
+            R.drawable.ic_like_active_24dp, R.drawable.ic_like_inactive_24dp
+        )
 
-        updateInfo(imgComment, txtComment, post.commentedByMe, post.comments,
-            R.drawable.ic_comment_active_24dp, R.drawable.ic_comment_inactive_24dp)
+        updateInfo(
+            imgComment, txtComment, post.commentedByMe, post.comments,
+            R.drawable.ic_comment_active_24dp, R.drawable.ic_comment_inactive_24dp
+        )
 
-        updateInfo(imgShare, txtShare, post.sharedByMe, post.shares,
-            R.drawable.ic_share_active_24dp, R.drawable.ic_share_inactive_24dp)
+        updateInfo(
+            imgShare, txtShare, post.sharedByMe, post.shares,
+            R.drawable.ic_share_active_24dp, R.drawable.ic_share_inactive_24dp
+        )
 
         if (post is Event) {//да, судя по коду, оно всегда true но если вдруг post прилетит типа Post, то должно оградить от ненужного поведения
             //отображение изображения с локацией и установка интента на открытие карты
@@ -56,22 +64,21 @@ class MainActivity : AppCompatActivity() {
             imgLocation.setOnClickListener {
                 Intent().apply {
                     action = Intent.ACTION_VIEW
-                    data = Uri.parse("geo:${post.location.lat},${post.location.lng}?z=${post.location.zoom}")
+                    data =
+                        Uri.parse("geo:${post.location.lat},${post.location.lng}?z=${post.location.zoom}")
                 }.also {
                     startActivity(it)
                 }
             }
         }
 
-        if (!post.media.isNullOrEmpty())
-        {
-            when (val first = post.media.first())
-            {
+        if (!post.media.isNullOrEmpty()) {
+            when (val first = post.media.first()) {
                 is Image -> {
                     TODO("отобразить картинку")
                 }
                 is Video -> {
-                    with (contentMedia) {
+                    with(contentMedia) {
                         setImageResource(R.drawable.ic_play_video)
                         visibility = View.VISIBLE
                         setOnClickListener {
@@ -92,8 +99,10 @@ class MainActivity : AppCompatActivity() {
         imgLike.setOnClickListener {
             post.likedByMe = !post.likedByMe
             post.likes += if (post.likedByMe) 1 else -1
-            updateInfo(imgLike, txtLike, post.likedByMe, post.likes,
-                R.drawable.ic_like_active_24dp, R.drawable.ic_like_inactive_24dp)
+            updateInfo(
+                imgLike, txtLike, post.likedByMe, post.likes,
+                R.drawable.ic_like_active_24dp, R.drawable.ic_like_inactive_24dp
+            )
         }
     }
 
