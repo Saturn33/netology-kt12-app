@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw4
+package ru.netology.saturn33.homework.hw5
 
 import android.content.Intent
 import android.net.Uri
@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
-import ru.netology.saturn33.homework.hw4.dto.*
+import ru.netology.saturn33.homework.hw5.dto.*
 import java.util.Date
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw4
+package ru.netology.saturn33.homework.hw5
 
 object Utils {
     fun publishedAgo(seconds: Long) : String {

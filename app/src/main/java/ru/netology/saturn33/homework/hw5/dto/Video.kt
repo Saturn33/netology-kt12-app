@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw4.dto
+package ru.netology.saturn33.homework.hw5.dto
 
 class Video(
     id: Int,
