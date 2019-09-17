@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
-        applicationId "ru.netology.saturn33.homework.hw3"
+        applicationId "ru.netology.saturn33.homework.hw5"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
@@ -32,4 +32,5 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
