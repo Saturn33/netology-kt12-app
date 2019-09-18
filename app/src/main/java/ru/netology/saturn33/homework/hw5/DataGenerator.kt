@@ -28,7 +28,12 @@ object DataGenerator {
             3, true,
             10, false,
             type = PostType.EVENT,
-            location = Location(55.7039398, 37.6240304, 17, "Офис Нетологии")
+            location = Location(
+                55.7039398,
+                37.6240304,
+                17,
+                "Варшавское шоссе, д. 1, стр. 3, 3 этаж, офис B306-B308"
+            )
         )
 
         val list = mutableListOf(

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginStart="@dimen/mid_margin"
     android:layout_marginTop="@dimen/small_margin"
     android:layout_marginEnd="@dimen/mid_margin"
@@ -24,18 +25,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/adLink"
-        android:layout_width="wrap_content"
+        android:id="@+id/address"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_tiny"
-        android:layout_marginEnd="@dimen/margin_tiny"
-        android:background="@color/colorAccent"
-        android:paddingStart="@dimen/padding_tiny"
-        android:paddingEnd="@dimen/padding_tiny"
-        android:text="@string/adv"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/block_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="10sp"
+        tools:text="address"
+        />
 
     <include
         android:id="@+id/block_footer"
@@ -43,5 +40,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/block_content" />
+        app:layout_constraintTop_toBottomOf="@id/address" />
 </androidx.constraintlayout.widget.ConstraintLayout>

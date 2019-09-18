@@ -24,7 +24,7 @@ class PostAdapter(val list: MutableList<Post>) : RecyclerView.Adapter<RecyclerVi
             )
             PostType.EVENT -> EventViewHolder(
                 this,
-                LayoutInflater.from(parent.context).inflate(R.layout.post_simple, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.post_event, parent, false)
             )
             PostType.AD -> AdViewHolder(
                 this,
