@@ -7,7 +7,7 @@ import ru.netology.saturn33.homework.hw5.dto.Video
 import java.util.*
 
 object DataGenerator {
-    fun getSomePosts(): MutableList<Post> {
+    fun getInitialPosts(): MutableList<Post> {
 
         val now = Date().time
         val media = Video(
@@ -90,8 +90,30 @@ object DataGenerator {
             ),
             Post(1, "Тестер", now - 400 * Intervals.DAY.seconds * 1000, "Тесттест123")
         )
-        repeat(10, {i -> list.add(0, Post(1, "Тестер$i", now - i * Intervals.DAY.seconds * 1000, "Тест$i"))})
         list.sortByDescending { post -> post.created }
         return list
+    }
+
+    fun getSomePosts(list: MutableList<Post>, count: Int) {
+        val initialId = list.size
+        val now = Date().time
+        repeat(
+            count
+        ) { i ->
+            val postId = (initialId + 1 + i).toLong()
+            list.add(
+                0,
+                Post(
+                    postId,
+                    "Тестер$postId",
+                    now - postId * Intervals.DAY.seconds * 1000,
+                    "Тест$postId"
+                )
+            )
+        }
+        //сортировка по времени добавления поста после добавления новых постов сделана для простоты;
+        //понятно, что придётся уведомлять об изменении всего датасета или прибегать к другим ухищрениям (DiffUtil или подобное),
+        //или же делать добавление более осознанным с поиском в какое место списка нужно добавить и запоминанием этих мест для того, чтобы уведомить о добавлении только этих элементов
+        list.sortByDescending { post -> post.created }
     }
 }

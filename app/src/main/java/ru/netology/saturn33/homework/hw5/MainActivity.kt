@@ -14,7 +14,16 @@ class MainActivity : AppCompatActivity() {
 
         with(container) {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = PostAdapter(DataGenerator.getSomePosts())
+            adapter = PostAdapter(DataGenerator.getInitialPosts())
+        }
+
+        newPostsAdd.setOnClickListener {
+            newPostsCount.text.toString().toInt().let {
+                if (it <= 0) return@let
+                val adapter = container.adapter as PostAdapter
+                DataGenerator.getSomePosts(adapter.list, it)
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 }
