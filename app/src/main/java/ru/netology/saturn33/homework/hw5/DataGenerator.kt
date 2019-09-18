@@ -96,12 +96,12 @@ object DataGenerator {
     }
 
     fun getSomePosts(list: MutableList<Post>, count: Int) {
-        val initialId = list.size
+        val lastId = list.maxBy { item -> item.id }?.id ?: 0
         val now = Date().time
         repeat(
             count
         ) { i ->
-            val postId = (initialId + 1 + i).toLong()
+            val postId = (lastId + 1 + i)
             val likesCnt = Random.nextInt(10)
             val commentsCnt = Random.nextInt(7)
             val sharesCnt = Random.nextInt(3)
