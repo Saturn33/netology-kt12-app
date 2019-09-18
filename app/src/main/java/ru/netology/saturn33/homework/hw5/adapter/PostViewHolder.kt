@@ -43,6 +43,12 @@ open class PostViewHolder(adapter: PostAdapter, itemView: View) :
                 }
             }
             imgLocation.setOnClickListener(null)
+            imgHide.setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    adapter.list.removeAt(adapterPosition)
+                    adapter.notifyItemRemoved(adapterPosition)
+                }
+            }
         }
     }
 

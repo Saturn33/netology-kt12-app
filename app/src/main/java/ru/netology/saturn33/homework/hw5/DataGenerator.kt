@@ -7,7 +7,7 @@ import ru.netology.saturn33.homework.hw5.dto.Video
 import java.util.*
 
 object DataGenerator {
-    fun getSomePosts(): List<Post> {
+    fun getSomePosts(): MutableList<Post> {
 
         val now = Date().time
         val media = Video(

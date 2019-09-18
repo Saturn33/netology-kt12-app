@@ -15,7 +15,7 @@ val viewTypeToPostType = mutableMapOf<Int, PostType>(
     5 to PostType.AD
 )
 
-class PostAdapter(val list: List<Post>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PostAdapter(val list: MutableList<Post>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewTypeToPostType[viewType]) {
             PostType.POST -> PostViewHolder(
