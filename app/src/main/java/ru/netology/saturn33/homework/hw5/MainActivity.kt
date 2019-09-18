@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         newPostsAdd.setOnClickListener {
             newPostsCount.text.toString().toInt().let {
                 if (it <= 0) return@let
+                newPostsCount.setText("")
                 val adapter = container.adapter as PostAdapter
                 DataGenerator.getSomePosts(adapter.list, it)
                 adapter.notifyDataSetChanged()

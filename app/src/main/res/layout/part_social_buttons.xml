@@ -17,7 +17,8 @@
         android:src="@drawable/ic_like_inactive_24dp"
         app:layout_constraintEnd_toStartOf="@id/txtLike"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginEnd="@dimen/huge_margin" />
+        app:layout_goneMarginEnd="@dimen/huge_margin"
+        android:contentDescription="@string/empty" />
 
     <TextView
         android:id="@+id/txtLike"
@@ -41,7 +42,8 @@
         android:src="@drawable/ic_comment_inactive_24dp"
         app:layout_constraintEnd_toStartOf="@id/txtComment"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginEnd="@dimen/huge_margin" />
+        app:layout_goneMarginEnd="@dimen/huge_margin"
+        android:contentDescription="@string/empty" />
 
     <TextView
         android:id="@+id/txtComment"
@@ -65,7 +67,8 @@
         app:layout_constraintEnd_toStartOf="@id/txtShare"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginEnd="@dimen/large_margin"
-        tools:text="share" />
+        tools:text="share"
+        android:contentDescription="@string/empty" />
 
     <TextView
         android:id="@+id/txtShare"

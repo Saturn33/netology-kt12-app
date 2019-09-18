@@ -5,6 +5,7 @@ import ru.netology.saturn33.homework.hw5.dto.Post
 import ru.netology.saturn33.homework.hw5.dto.PostType
 import ru.netology.saturn33.homework.hw5.dto.Video
 import java.util.*
+import kotlin.random.Random
 
 object DataGenerator {
     fun getInitialPosts(): MutableList<Post> {
@@ -101,13 +102,22 @@ object DataGenerator {
             count
         ) { i ->
             val postId = (initialId + 1 + i).toLong()
+            val likesCnt = Random.nextInt(10)
+            val commentsCnt = Random.nextInt(7)
+            val sharesCnt = Random.nextInt(3)
             list.add(
                 0,
                 Post(
                     postId,
-                    "Тестер$postId",
+                    "Тестер $postId",
                     now - postId * Intervals.DAY.seconds * 1000,
-                    "Тест$postId"
+                    "Тестовое сообщение $postId",
+                    likes = likesCnt,
+                    comments = commentsCnt,
+                    shares = sharesCnt,
+                    likedByMe = if (likesCnt == 0) false else Random.nextBoolean(),
+                    commentedByMe = if (commentsCnt == 0) false else Random.nextBoolean(),
+                    sharedByMe = if (sharesCnt == 0) false else Random.nextBoolean()
                 )
             )
         }

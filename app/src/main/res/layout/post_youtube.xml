@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginStart="@dimen/mid_margin"
-    android:layout_marginTop="@dimen/mid_margin"
+    android:layout_marginTop="@dimen/small_margin"
     android:layout_marginEnd="@dimen/mid_margin"
-    android:layout_marginBottom="@dimen/mid_margin"
+    android:layout_marginBottom="@dimen/small_margin"
     android:background="#ffffff"
     android:padding="@dimen/mid_margin"
     app:layout_constraintEnd_toEndOf="parent"
@@ -34,7 +34,8 @@
         android:textColor="#000000"
         android:textSize="18sp"
         app:layout_constraintTop_toBottomOf="@id/block_content"
-        tools:text="media" />
+        tools:text="media"
+        android:contentDescription="@string/empty" />
 
     <include
         android:id="@+id/block_footer"

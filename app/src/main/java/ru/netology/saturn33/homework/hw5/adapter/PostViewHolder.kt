@@ -9,7 +9,8 @@ import kotlinx.android.synthetic.main.part_social_buttons.view.*
 import ru.netology.saturn33.homework.hw5.R
 import ru.netology.saturn33.homework.hw5.Utils
 import ru.netology.saturn33.homework.hw5.dto.Post
-import java.util.Date
+import java.text.SimpleDateFormat
+import java.util.*
 
 open class PostViewHolder(adapter: PostAdapter, itemView: View) :
     BaseViewHolder(adapter, itemView) {
@@ -28,10 +29,13 @@ open class PostViewHolder(adapter: PostAdapter, itemView: View) :
                     val item = adapter.list[adapterPosition]
                     Intent().apply {
                         action = Intent.ACTION_SEND
-
+                        val dateFormatted = SimpleDateFormat(
+                            "dd.MM.yyyy HH:mm",
+                            Locale.US
+                        ).format(Date(item.created))
                         putExtra(
                             Intent.EXTRA_TEXT, """
-                            ${item.author} (${item.created})
+                            ${item.author} (${dateFormatted})
                             
                             ${item.content}
                         """.trimIndent()
