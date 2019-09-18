@@ -13,10 +13,12 @@ object DataGenerator {
         val now = Date().time
         val media = Video(
             22,
-            "https://www.youtube.com/watch?v=G9VrVUoQ0j8",
+            "https://www.youtube.com/watch?v=G9VrVUoQ0j8"
+/*
             "ANDROID 10 is Here!",
             2200,
             916
+*/
         )
 
         val coroutinesEvent = Post(
