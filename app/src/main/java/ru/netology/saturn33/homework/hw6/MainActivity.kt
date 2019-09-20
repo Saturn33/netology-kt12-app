@@ -1,6 +1,7 @@
 package ru.netology.saturn33.homework.hw6
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.ktor.client.request.get
@@ -22,17 +23,21 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     }
 
     private fun fetchData() = launch(Dispatchers.IO) {
-        //TODO show progressbar
+        withContext(Dispatchers.Main) {
+            progressBar.visibility = View.VISIBLE
+        }
+
         val listBasic = Api.client.get<MutableList<Post>>(Api.urlBasic)
 //        val listAdv = Api.client.get<MutableList<Post>>(Api.urlAdv)
         //TODO generate list with ads
+
         withContext(Dispatchers.Main) {
             with(container) {
                 layoutManager = LinearLayoutManager(this@MainActivity)
                 adapter = PostAdapter(listBasic)
             }
+            progressBar.visibility = View.GONE
         }
-        //TODO hide progressbar
     }
 
     override fun onDestroy() {
