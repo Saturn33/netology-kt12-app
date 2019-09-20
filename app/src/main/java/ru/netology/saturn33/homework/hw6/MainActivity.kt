@@ -3,31 +3,40 @@ package ru.netology.saturn33.homework.hw6
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import io.ktor.client.request.get
+import io.ktor.util.KtorExperimentalAPI
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
 import ru.netology.saturn33.homework.hw6.adapter.PostAdapter
+import ru.netology.saturn33.homework.hw6.client.Api
+import ru.netology.saturn33.homework.hw6.dto.Post
 
-class MainActivity : AppCompatActivity() {
+@KtorExperimentalAPI
+class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        with(container) {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = PostAdapter(DataGenerator.getInitialPosts())
-        }
+        fetchData()
+    }
 
-        newPostsAdd.setOnClickListener {
-            try {
-                newPostsCount.text.toString().toInt().let {
-                    if (it <= 0) return@let
-                    val adapter = container.adapter as PostAdapter
-                    DataGenerator.getSomePosts(adapter.list, it)
-                    adapter.notifyDataSetChanged()
-                }
-            } catch (e: NumberFormatException) {
+    private fun fetchData() = launch(Dispatchers.IO) {
+        //TODO show progressbar
+        val listBasic = Api.client.get<MutableList<Post>>(Api.urlBasic)
+//        val listAdv = Api.client.get<MutableList<Post>>(Api.urlAdv)
+        //TODO generate list with ads
+        withContext(Dispatchers.Main) {
+            with(container) {
+                layoutManager = LinearLayoutManager(this@MainActivity)
+                adapter = PostAdapter(listBasic)
             }
-            newPostsCount.setText("")
         }
+        //TODO hide progressbar
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cancel()
     }
 }
