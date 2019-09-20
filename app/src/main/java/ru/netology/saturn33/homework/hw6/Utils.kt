@@ -1,5 +1,8 @@
 package ru.netology.saturn33.homework.hw6
 
+import ru.netology.saturn33.homework.hw6.dto.Post
+import kotlin.math.min
+
 object Utils {
     fun publishedAgo(seconds: Long) : String {
         return when (seconds) {
@@ -22,4 +25,9 @@ object Utils {
         return titles[if (number % 100 in 5..19) 2 else cases[if (number % 10 < 5) number % 10 else 5]]
     }
 
+    fun injectAds(basicList: MutableList<Post>, advList: MutableList<Post>, each: Int = 3) {
+        if (each < 1) return
+        val adsCount = min(basicList.size / each, advList.size)
+        repeat(adsCount) { i -> basicList.add(i + (i + 1) * each, advList[i]) }
+    }
 }

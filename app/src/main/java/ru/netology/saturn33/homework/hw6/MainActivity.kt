@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }
 
         val listBasic = Api.client.get<MutableList<Post>>(Api.urlBasic)
-//        val listAdv = Api.client.get<MutableList<Post>>(Api.urlAdv)
-        //TODO generate list with ads
+        val listAdv = Api.client.get<MutableList<Post>>(Api.urlAdv)
+        Utils.injectAds(listBasic, listAdv)
 
         withContext(Dispatchers.Main) {
             with(container) {
