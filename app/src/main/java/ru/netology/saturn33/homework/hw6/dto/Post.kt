@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw5.dto
+package ru.netology.saturn33.homework.hw6.dto
 
 enum class PostType {
     POST, EVENT, REPOST, YOUTUBE, AD

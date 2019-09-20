@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw5
+package ru.netology.saturn33.homework.hw6
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

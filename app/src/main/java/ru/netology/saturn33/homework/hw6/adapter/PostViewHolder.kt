@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw5.adapter
+package ru.netology.saturn33.homework.hw6.adapter
 
 import android.content.Intent
 import android.view.View
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.footer.view.*
 import kotlinx.android.synthetic.main.part_main_content.view.*
 import kotlinx.android.synthetic.main.part_social_buttons.view.*
-import ru.netology.saturn33.homework.hw5.R
-import ru.netology.saturn33.homework.hw5.Utils
-import ru.netology.saturn33.homework.hw5.dto.Post
+import ru.netology.saturn33.homework.hw6.R
+import ru.netology.saturn33.homework.hw6.Utils
+import ru.netology.saturn33.homework.hw6.dto.Post
 import java.text.SimpleDateFormat
 import java.util.*
 

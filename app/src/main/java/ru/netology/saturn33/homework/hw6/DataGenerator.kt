@@ -1,9 +1,9 @@
-package ru.netology.saturn33.homework.hw5
+package ru.netology.saturn33.homework.hw6
 
-import ru.netology.saturn33.homework.hw5.dto.Location
-import ru.netology.saturn33.homework.hw5.dto.Post
-import ru.netology.saturn33.homework.hw5.dto.PostType
-import ru.netology.saturn33.homework.hw5.dto.Video
+import ru.netology.saturn33.homework.hw6.dto.Location
+import ru.netology.saturn33.homework.hw6.dto.Post
+import ru.netology.saturn33.homework.hw6.dto.PostType
+import ru.netology.saturn33.homework.hw6.dto.Video
 import java.util.*
 import kotlin.random.Random
 

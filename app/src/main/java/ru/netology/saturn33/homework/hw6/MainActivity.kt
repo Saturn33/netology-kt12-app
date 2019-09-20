@@ -1,10 +1,10 @@
-package ru.netology.saturn33.homework.hw5
+package ru.netology.saturn33.homework.hw6
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import ru.netology.saturn33.homework.hw5.adapter.PostAdapter
+import ru.netology.saturn33.homework.hw6.adapter.PostAdapter
 
 class MainActivity : AppCompatActivity() {
 

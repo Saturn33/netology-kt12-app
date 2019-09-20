@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw5
+package ru.netology.saturn33.homework.hw6
 
 enum class Intervals(val seconds: Long) {
     SECOND(1L),

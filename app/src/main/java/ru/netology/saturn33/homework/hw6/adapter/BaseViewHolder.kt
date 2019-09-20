@@ -1,11 +1,11 @@
-package ru.netology.saturn33.homework.hw5.adapter
+package ru.netology.saturn33.homework.hw6.adapter
 
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ru.netology.saturn33.homework.hw5.R
-import ru.netology.saturn33.homework.hw5.dto.Post
+import ru.netology.saturn33.homework.hw6.R
+import ru.netology.saturn33.homework.hw6.dto.Post
 
 abstract class BaseViewHolder(val adapter: PostAdapter, itemView: View) :
     RecyclerView.ViewHolder(itemView) {
