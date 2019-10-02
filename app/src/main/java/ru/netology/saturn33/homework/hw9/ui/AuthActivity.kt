@@ -32,10 +32,31 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onStart() {
         super.onStart()
-        if (isAuthenticated()) {
-            startActivity<FeedActivity>()
-            finish()
+        authDialog = indeterminateProgressDialog(
+            title = getString(R.string.auth_title),
+            message = getString(R.string.auth_checking_data)
+        ).apply {
+            setCancelable(false)
+            hide()
         }
+
+/* //TODO сделать проверку токена запросом me, когда научимся запрашивать с токеном
+        launch {
+            authDialog?.show()
+            if (isAuthenticated()) {
+                if (checkMe())
+                {
+                    startActivity<FeedActivity>()
+                    finish()
+                }
+                else {
+                    //removeUserAuth()
+                    login.error = "Авторизация не подтвердилась, введите логин и пароль заново"
+                }
+            }
+            authDialog?.hide()
+        }
+*/
 
         btnLogin.setOnClickListener {
             var validationResult: Pair<Boolean, String> = Utils.isLoginValid(login.text.toString())
@@ -50,13 +71,7 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             }
 
             launch {
-                authDialog = indeterminateProgressDialog(
-                    title = getString(R.string.auth_title),
-                    message = getString(R.string.auth_checking_data)
-                ).apply {
-                    setCancelable(false)
-                    show()
-                }
+                authDialog?.show()
                 val response = Repository.authenticate(
                     login.text.toString(),
                     password.text.toString()
@@ -84,6 +99,11 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }
     }
 
+    private suspend fun checkMe(): Boolean {
+        val response = Repository.me()
+        return response.isSuccessful && response.body()?.id is Long
+    }
+
     override fun onStop() {
         super.onStop()
         cancel()
@@ -101,4 +121,6 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             AUTHENTICATED_SHARED_KEY,
             token
         ).commit()
+
+    private fun removeUserAuth() = getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit().remove(AUTHENTICATED_SHARED_KEY).commit()
 }

@@ -2,11 +2,9 @@ package ru.netology.saturn33.homework.hw9.client
 
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
-import ru.netology.saturn33.homework.hw9.dto.AuthenticationRequestDto
-import ru.netology.saturn33.homework.hw9.dto.AuthenticationResponseDto
-import ru.netology.saturn33.homework.hw9.dto.RegistrationRequestDto
-import ru.netology.saturn33.homework.hw9.dto.RegistrationResponseDto
+import ru.netology.saturn33.homework.hw9.dto.*
 
 interface RAPI {
     @POST("authentication")
@@ -14,4 +12,7 @@ interface RAPI {
 
     @POST("registration")
     suspend fun register(@Body authRequestParams: RegistrationRequestDto): Response<RegistrationResponseDto>
+
+    @GET("me")
+    suspend fun me(): Response<UserResponseDto>
 }

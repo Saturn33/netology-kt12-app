@@ -27,4 +27,6 @@ object Repository {
     suspend fun register(login: String, password: String) = API.register(
         RegistrationRequestDto(login, password)
     )
+
+    suspend fun me() = API.me()
 }
