@@ -5,6 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import ru.netology.saturn33.homework.hw9.API_BASE_URL
 import ru.netology.saturn33.homework.hw9.client.RAPI
 import ru.netology.saturn33.homework.hw9.dto.AuthenticationRequestDto
+import ru.netology.saturn33.homework.hw9.dto.RegistrationRequestDto
 
 object Repository {
 
@@ -21,5 +22,9 @@ object Repository {
 
     suspend fun authenticate(login: String, password: String) = API.authenticate(
         AuthenticationRequestDto(login, password)
+    )
+
+    suspend fun register(login: String, password: String) = API.register(
+        RegistrationRequestDto(login, password)
     )
 }

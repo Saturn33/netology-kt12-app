@@ -8,9 +8,17 @@
     <string name="username">Имя пользователя</string>
     <string name="password">Пароль</string>
     <string name="auth">Авторизоваться</string>
+    <string name="goToRegister">Регистрация</string>
     <string name="register">Зарегистрироваться</string>
-    <string name="auth_success">Успешно</string>
+    <string name="auth_success">Успешная авторизация</string>
     <string name="auth_error">Ошибка</string>
     <string name="auth_checking_data">Проверяем данные</string>
     <string name="auth_title">Авторизация</string>
+    <string name="password_confirmation">Повтор пароля</string>
+    <string name="registration_attempt">Делаем попытку регистрации</string>
+    <string name="registration">Регистрация</string>
+    <string name="passwords_do_not_match">Пароли не совпадают</string>
+    <string name="unknown_registration_error">Неизвестная ошибка регистрации</string>
+    <string name="registration_success">Регистрация успешна</string>
+    <string name="unknown_auth_error">Неизвестная ошибка авторизации</string>
 </resources>

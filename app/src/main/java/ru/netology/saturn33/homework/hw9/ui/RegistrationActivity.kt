@@ -4,15 +4,13 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import io.ktor.util.KtorExperimentalAPI
-import kotlinx.android.synthetic.main.activity_auth.*
+import kotlinx.android.synthetic.main.activity_registration.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.json.JSONObject
 import ru.netology.saturn33.homework.hw9.API_SHARED_FILE
@@ -21,80 +19,69 @@ import ru.netology.saturn33.homework.hw9.R
 import ru.netology.saturn33.homework.hw9.Utils
 import ru.netology.saturn33.homework.hw9.repositories.Repository
 
-@KtorExperimentalAPI
-class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
-    var authDialog: ProgressDialog? = null
+class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+    var regDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth)
+        setContentView(R.layout.activity_registration)
     }
 
     override fun onStart() {
         super.onStart()
-        if (isAuthenticated()) {
-            startActivity<FeedActivity>()
-            finish()
-        }
+        btnRegister.setOnClickListener {
+            val pass1 = password.text.toString()
+            val pass2 = password_confirmation.text.toString()
+            if (pass1 != pass2) {
+                password.error = getString(R.string.passwords_do_not_match)
+                return@setOnClickListener
+            }
 
-        btnLogin.setOnClickListener {
             var validationResult: Pair<Boolean, String> = Utils.isLoginValid(login.text.toString())
             if (!validationResult.first) {
                 login.error = validationResult.second
                 return@setOnClickListener
             }
-            validationResult = Utils.isPasswordValid(password.text.toString())
+            validationResult = Utils.isPasswordValid(pass1)
             if (!validationResult.first) {
                 password.error = validationResult.second
                 return@setOnClickListener
             }
 
             launch {
-                authDialog = indeterminateProgressDialog(
-                    title = getString(R.string.auth_title),
-                    message = getString(R.string.auth_checking_data)
+                regDialog = indeterminateProgressDialog(
+                    title = getString(R.string.registration),
+                    message = getString(R.string.registration_attempt)
                 ).apply {
                     setCancelable(false)
                     show()
                 }
-                val response = Repository.authenticate(
+                val response = Repository.register(
                     login.text.toString(),
                     password.text.toString()
                 )
-                authDialog?.hide()
+                regDialog?.hide()
                 if (response.isSuccessful) {
-                    toast(getString(R.string.auth_success)).show()
+                    toast(getString(R.string.registration_success)).show()
                     setUserAuth(response.body()?.token ?: "")
-                    startActivity<FeedActivity>()
                     finish()
                 } else {
                     try {
                         val json = JSONObject(response.errorBody()?.string() ?: "")
                         login.error = json.get("error").toString()
                     } catch (e: Exception) {
-                        longToast(getString(R.string.unknown_auth_error))
+                        longToast(getString(R.string.unknown_registration_error))
                     }
                 }
-
             }
-        }
-
-        btnRegister.setOnClickListener {
-            startActivity<RegistrationActivity>()
         }
     }
 
     override fun onStop() {
         super.onStop()
         cancel()
-        authDialog?.hide()
+        regDialog?.hide()
     }
-
-    private fun isAuthenticated() =
-        getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).getString(
-            AUTHENTICATED_SHARED_KEY,
-            ""
-        )?.isNotEmpty() ?: false
 
     private fun setUserAuth(token: String) =
         getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit().putString(
