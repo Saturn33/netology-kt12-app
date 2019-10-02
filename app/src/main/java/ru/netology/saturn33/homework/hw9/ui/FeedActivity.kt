@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw9
+package ru.netology.saturn33.homework.hw9.ui
 
 import android.os.Bundle
 import android.view.View
@@ -9,13 +9,14 @@ import io.ktor.client.request.get
 import io.ktor.util.KtorExperimentalAPI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
+import ru.netology.saturn33.homework.hw9.R
+import ru.netology.saturn33.homework.hw9.Utils
 import ru.netology.saturn33.homework.hw9.adapter.PostAdapter
 import ru.netology.saturn33.homework.hw9.client.Api
 import ru.netology.saturn33.homework.hw9.dto.Post
-import java.lang.Exception
 
 @KtorExperimentalAPI
-class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,16 +35,19 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             listBasic = Api.client.get(Api.urlBasic)
             val listAdv = Api.client.get<MutableList<Post>>(Api.urlAdv)
             Utils.injectAds(listBasic, listAdv)
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             listBasic = mutableListOf()
             withContext(Dispatchers.Main) {
-                Toast.makeText(this@MainActivity, "Error: " + e.stackTrace.firstOrNull(), Toast.LENGTH_LONG).show()
+                Toast.makeText(
+                    this@FeedActivity,
+                    "Error: " + e.stackTrace.firstOrNull(),
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
         withContext(Dispatchers.Main) {
             with(container) {
-                layoutManager = LinearLayoutManager(this@MainActivity)
+                layoutManager = LinearLayoutManager(this@FeedActivity)
                 adapter = PostAdapter(listBasic)
             }
             progressBar.visibility = View.GONE
