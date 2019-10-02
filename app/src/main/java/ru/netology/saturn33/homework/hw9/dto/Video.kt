@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw6.dto
+package ru.netology.saturn33.homework.hw9.dto
 
 class Video(
     val id: Int,

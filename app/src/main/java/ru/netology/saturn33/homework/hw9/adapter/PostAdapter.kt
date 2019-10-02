@@ -1,11 +1,11 @@
-package ru.netology.saturn33.homework.hw6.adapter
+package ru.netology.saturn33.homework.hw9.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ru.netology.saturn33.homework.hw6.R
-import ru.netology.saturn33.homework.hw6.dto.Post
-import ru.netology.saturn33.homework.hw6.dto.PostType
+import ru.netology.saturn33.homework.hw9.R
+import ru.netology.saturn33.homework.hw9.dto.Post
+import ru.netology.saturn33.homework.hw9.dto.PostType
 
 val viewTypeToPostType = mutableMapOf<Int, PostType>(
     1 to PostType.POST,

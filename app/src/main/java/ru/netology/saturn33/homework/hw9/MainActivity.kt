@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw6
+package ru.netology.saturn33.homework.hw9
 
 import android.os.Bundle
 import android.view.View
@@ -9,9 +9,9 @@ import io.ktor.client.request.get
 import io.ktor.util.KtorExperimentalAPI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
-import ru.netology.saturn33.homework.hw6.adapter.PostAdapter
-import ru.netology.saturn33.homework.hw6.client.Api
-import ru.netology.saturn33.homework.hw6.dto.Post
+import ru.netology.saturn33.homework.hw9.adapter.PostAdapter
+import ru.netology.saturn33.homework.hw9.client.Api
+import ru.netology.saturn33.homework.hw9.dto.Post
 import java.lang.Exception
 
 @KtorExperimentalAPI

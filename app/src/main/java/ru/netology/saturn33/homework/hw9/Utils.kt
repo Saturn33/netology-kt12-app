@@ -1,6 +1,6 @@
-package ru.netology.saturn33.homework.hw6
+package ru.netology.saturn33.homework.hw9
 
-import ru.netology.saturn33.homework.hw6.dto.Post
+import ru.netology.saturn33.homework.hw9.dto.Post
 import kotlin.math.min
 
 object Utils {

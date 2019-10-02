@@ -1,9 +1,9 @@
-package ru.netology.saturn33.homework.hw6.adapter
+package ru.netology.saturn33.homework.hw9.adapter
 
 import android.view.View
 import kotlinx.android.synthetic.main.part_main_content.view.*
-import ru.netology.saturn33.homework.hw6.R
-import ru.netology.saturn33.homework.hw6.dto.Post
+import ru.netology.saturn33.homework.hw9.R
+import ru.netology.saturn33.homework.hw9.dto.Post
 
 class RepostViewHolder(adapter: PostAdapter, itemView: View) : PostViewHolder(adapter, itemView) {
     override fun bind(post: Post) {

@@ -1,25 +1,25 @@
-package ru.netology.saturn33.homework.hw6.adapter
+package ru.netology.saturn33.homework.hw9.adapter
 
 import android.content.Intent
 import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.post_youtube.view.*
+import kotlinx.android.synthetic.main.post_ad.view.*
 
-class YoutubeViewHolder(adapter: PostAdapter, itemView: View) : PostViewHolder(adapter, itemView) {
+
+class AdViewHolder(adapter: PostAdapter, itemView: View) : PostViewHolder(adapter, itemView) {
     init {
         with(itemView) {
-            contentMedia.setOnClickListener {
+            adLink.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     val item = adapter.list[adapterPosition]
-                    item.video?.let { video ->
+                    item.link?.let { link ->
                         Intent().apply {
                             action = Intent.ACTION_VIEW
-                            data = Uri.parse(video.url)
+                            data = Uri.parse(link)
                         }.also {
                             itemView.context.startActivity(it)
                         }
-
                     }
                 }
             }

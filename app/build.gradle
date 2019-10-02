@@ -8,7 +8,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
-        applicationId "ru.netology.saturn33.homework.hw6"
+        applicationId "ru.netology.saturn33.homework.hw9"
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1

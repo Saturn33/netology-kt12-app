@@ -1,4 +1,4 @@
-package ru.netology.saturn33.homework.hw6.client
+package ru.netology.saturn33.homework.hw9.client
 
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.GsonSerializer
