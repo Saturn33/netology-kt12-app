@@ -13,9 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.RegistrationActivity" />
-        <activity android:name=".ui.FeedActivity" />
-        <activity android:name=".ui.AuthActivity">
+        <activity
+            android:name=".ui.RegistrationActivity"
+            android:label="@string/title_registration" />
+        <activity
+            android:name=".ui.FeedActivity"
+            android:label="@string/title_main_screen" />
+        <activity
+            android:name=".ui.AuthActivity"
+            android:label="@string/title_enter">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

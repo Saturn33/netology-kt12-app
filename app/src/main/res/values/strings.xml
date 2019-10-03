@@ -22,4 +22,7 @@
     <string name="registration_success">Регистрация успешна</string>
     <string name="unknown_auth_error">Неизвестная ошибка авторизации</string>
     <string name="logout">Выйти</string>
+    <string name="title_registration">Регистрация</string>
+    <string name="title_main_screen">Основной экран</string>
+    <string name="title_enter">Вход</string>
 </resources>
