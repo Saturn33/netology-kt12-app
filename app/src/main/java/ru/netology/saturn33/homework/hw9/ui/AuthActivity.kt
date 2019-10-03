@@ -1,19 +1,19 @@
 package ru.netology.saturn33.homework.hw9.ui
 
 import android.app.ProgressDialog
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.ktor.util.KtorExperimentalAPI
 import kotlinx.android.synthetic.main.activity_auth.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.json.JSONObject
-import ru.netology.saturn33.homework.hw9.API_SHARED_FILE
-import ru.netology.saturn33.homework.hw9.AUTHENTICATED_SHARED_KEY
 import ru.netology.saturn33.homework.hw9.R
 import ru.netology.saturn33.homework.hw9.Utils
 import ru.netology.saturn33.homework.hw9.repositories.Repository
@@ -31,7 +31,7 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onStart() {
         super.onStart()
 
-        if (isAuthenticated()) {
+        if (Utils.isAuthenticated(this)) {
             startActivity<FeedActivity>()
             finish()
         }
@@ -82,7 +82,7 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                 authDialog?.hide()
                 if (response.isSuccessful) {
                     toast(getString(R.string.auth_success))
-                    setUserAuth(response.body()?.token ?: "")
+                    Utils.setUserAuth(this@AuthActivity, response.body()?.token ?: "")
                     startActivity<FeedActivity>()
                     finish()
                 } else {
@@ -111,18 +111,4 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         job?.cancel()
         authDialog?.hide()
     }
-
-    private fun isAuthenticated() =
-        getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).getString(
-            AUTHENTICATED_SHARED_KEY,
-            ""
-        )?.isNotEmpty() ?: false
-
-    private fun setUserAuth(token: String) =
-        getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit().putString(
-            AUTHENTICATED_SHARED_KEY,
-            token
-        ).commit()
-
-    private fun removeUserAuth() = getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit().remove(AUTHENTICATED_SHARED_KEY).commit()
 }

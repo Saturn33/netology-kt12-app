@@ -1,5 +1,6 @@
 package ru.netology.saturn33.homework.hw9
 
+import android.content.Context
 import ru.netology.saturn33.homework.hw9.dto.Post
 import kotlin.math.min
 
@@ -51,5 +52,22 @@ object Utils {
 
         return true to ""
     }
+
+    fun removeUserAuth(ctx: Context) =
+        ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit().remove(
+            AUTHENTICATED_SHARED_KEY
+        ).commit()
+
+    fun setUserAuth(ctx: Context, token: String) =
+        ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit().putString(
+            AUTHENTICATED_SHARED_KEY,
+            token
+        ).commit()
+
+    fun isAuthenticated(ctx: Context) =
+        ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).getString(
+            AUTHENTICATED_SHARED_KEY,
+            ""
+        )?.isNotEmpty() ?: false
 
 }

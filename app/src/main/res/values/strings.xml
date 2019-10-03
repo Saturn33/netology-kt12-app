@@ -21,4 +21,5 @@
     <string name="unknown_registration_error">Неизвестная ошибка регистрации</string>
     <string name="registration_success">Регистрация успешна</string>
     <string name="unknown_auth_error">Неизвестная ошибка авторизации</string>
+    <string name="logout">Выйти</string>
 </resources>

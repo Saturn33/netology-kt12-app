@@ -1,6 +1,8 @@
 package ru.netology.saturn33.homework.hw9.ui
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +11,7 @@ import io.ktor.client.request.get
 import io.ktor.util.KtorExperimentalAPI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
+import org.jetbrains.anko.startActivity
 import ru.netology.saturn33.homework.hw9.R
 import ru.netology.saturn33.homework.hw9.Utils
 import ru.netology.saturn33.homework.hw9.adapter.PostAdapter
@@ -23,6 +26,24 @@ class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         setContentView(R.layout.activity_main)
 
         fetchData()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_exit -> {
+                Utils.removeUserAuth(this@FeedActivity)
+                startActivity<AuthActivity>()
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun fetchData() = launch(Dispatchers.IO) {

@@ -1,17 +1,17 @@
 package ru.netology.saturn33.homework.hw9.ui
 
 import android.app.ProgressDialog
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_registration.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.json.JSONObject
-import ru.netology.saturn33.homework.hw9.API_SHARED_FILE
-import ru.netology.saturn33.homework.hw9.AUTHENTICATED_SHARED_KEY
 import ru.netology.saturn33.homework.hw9.R
 import ru.netology.saturn33.homework.hw9.Utils
 import ru.netology.saturn33.homework.hw9.repositories.Repository
@@ -61,7 +61,7 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
                 regDialog?.hide()
                 if (response.isSuccessful) {
                     toast(getString(R.string.registration_success))
-                    setUserAuth(response.body()?.token ?: "")
+                    Utils.setUserAuth(this@RegistrationActivity, response.body()?.token ?: "")
                     finish()
                 } else {
                     try {
@@ -81,9 +81,4 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
         regDialog?.hide()
     }
 
-    private fun setUserAuth(token: String) =
-        getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit().putString(
-            AUTHENTICATED_SHARED_KEY,
-            token
-        ).commit()
 }
