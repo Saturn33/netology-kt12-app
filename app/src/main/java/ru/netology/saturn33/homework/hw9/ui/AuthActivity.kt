@@ -21,6 +21,7 @@ import ru.netology.saturn33.homework.hw9.repositories.Repository
 @KtorExperimentalAPI
 class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     var authDialog: ProgressDialog? = null
+    var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +73,7 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                 return@setOnClickListener
             }
 
-            launch {
+            job = launch {
                 authDialog?.show()
                 val response = Repository.authenticate(
                     login.text.toString(),
@@ -107,7 +108,7 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onStop() {
         super.onStop()
-        cancel()
+        job?.cancel()
         authDialog?.hide()
     }
 

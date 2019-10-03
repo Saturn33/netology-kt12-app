@@ -18,6 +18,7 @@ import ru.netology.saturn33.homework.hw9.repositories.Repository
 
 class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     var regDialog: ProgressDialog? = null
+    var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +46,7 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
                 return@setOnClickListener
             }
 
-            launch {
+            job = launch {
                 regDialog = indeterminateProgressDialog(
                     title = getString(R.string.registration),
                     message = getString(R.string.registration_attempt)
@@ -76,7 +77,7 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
 
     override fun onStop() {
         super.onStop()
-        cancel()
+        job?.cancel()
         regDialog?.hide()
     }
 
