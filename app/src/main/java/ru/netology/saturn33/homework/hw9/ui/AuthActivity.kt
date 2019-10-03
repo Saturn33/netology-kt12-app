@@ -30,6 +30,7 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onStart() {
         super.onStart()
+        title = getString(R.string.title_enter)
 
         if (Utils.isAuthenticated(this)) {
             startActivity<FeedActivity>()
