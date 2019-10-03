@@ -6,10 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import io.ktor.util.KtorExperimentalAPI
 import kotlinx.android.synthetic.main.activity_auth.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.startActivity
@@ -32,6 +29,11 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onStart() {
         super.onStart()
+
+        if (isAuthenticated()) {
+            startActivity<FeedActivity>()
+            finish()
+        }
         authDialog = indeterminateProgressDialog(
             title = getString(R.string.auth_title),
             message = getString(R.string.auth_checking_data)
@@ -78,7 +80,7 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                 )
                 authDialog?.hide()
                 if (response.isSuccessful) {
-                    toast(getString(R.string.auth_success)).show()
+                    toast(getString(R.string.auth_success))
                     setUserAuth(response.body()?.token ?: "")
                     startActivity<FeedActivity>()
                     finish()
@@ -90,7 +92,6 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                         longToast(getString(R.string.unknown_auth_error))
                     }
                 }
-
             }
         }
 

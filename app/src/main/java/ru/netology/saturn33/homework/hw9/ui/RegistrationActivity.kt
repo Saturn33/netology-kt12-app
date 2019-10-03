@@ -5,10 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_registration.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
@@ -62,7 +59,7 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
                 )
                 regDialog?.hide()
                 if (response.isSuccessful) {
-                    toast(getString(R.string.registration_success)).show()
+                    toast(getString(R.string.registration_success))
                     setUserAuth(response.body()?.token ?: "")
                     finish()
                 } else {
