@@ -19,18 +19,18 @@
         tools:showIn="@layout/post_simple"
         android:contentDescription="@string/empty" />
 
-    <ImageButton
-        android:id="@+id/imgLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/mid_margin"
-        android:layout_marginEnd="@dimen/mid_margin"
-        android:background="#ffffff"
-        android:src="@drawable/ic_location_on_black_24dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@id/block_social_buttons"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/empty" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/imgLocation"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/mid_margin"-->
+<!--        android:layout_marginEnd="@dimen/mid_margin"-->
+<!--        android:background="#ffffff"-->
+<!--        android:src="@drawable/ic_location_on_black_24dp"-->
+<!--        android:visibility="gone"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/block_social_buttons"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:contentDescription="@string/empty" />-->
 
     <include
         android:id="@+id/block_social_buttons"

@@ -1,7 +1,7 @@
 package ru.netology.saturn33.homework.hw10
 
 import android.content.Context
-import ru.netology.saturn33.homework.hw10.dto.Post
+import ru.netology.saturn33.homework.hw10.dto.PostModel
 import kotlin.math.min
 
 object Utils {
@@ -26,7 +26,7 @@ object Utils {
         return titles[if (number % 100 in 5..19) 2 else cases[if (number % 10 < 5) number % 10 else 5]]
     }
 
-    fun injectAds(basicList: MutableList<Post>, advList: MutableList<Post>, each: Int = 3) {
+    fun injectAds(basicList: MutableList<PostModel>, advList: MutableList<PostModel>, each: Int = 3) {
         if (each < 1) return
         val adsCount = min(basicList.size / each, advList.size)
         repeat(adsCount) { i -> basicList.add(i + (i + 1) * each, advList[i]) }
@@ -64,10 +64,8 @@ object Utils {
             token
         ).commit()
 
-    fun isAuthenticated(ctx: Context) =
-        ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).getString(
-            AUTHENTICATED_SHARED_KEY,
-            ""
-        )?.isNotEmpty() ?: false
+    fun getToken(ctx: Context) = ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).getString(AUTHENTICATED_SHARED_KEY,null)
+
+    fun isAuthenticated(token: String?) = token?.isNotEmpty() ?: false
 
 }

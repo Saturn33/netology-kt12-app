@@ -1,5 +1,5 @@
 package ru.netology.saturn33.homework.hw10.adapter
-
+/*
 import android.content.Intent
 import android.net.Uri
 import android.view.View
@@ -26,3 +26,4 @@ class AdViewHolder(adapter: PostAdapter, itemView: View) : PostViewHolder(adapte
         }
     }
 }
+*/

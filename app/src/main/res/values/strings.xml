@@ -25,4 +25,15 @@
     <string name="title_registration">Регистрация</string>
     <string name="title_main_screen">Основной экран</string>
     <string name="title_enter">Вход</string>
+    <string name="post_creation">Создание поста</string>
+    <string name="add_post">Добавить пост</string>
+    <string name="enter_post_text">Введите текст поста</string>
+    <string name="feed">Фид</string>
+    <string name="fetching_feed">Получаем список постов</string>
+    <string name="post_creation_error">Ошибка создания поста</string>
+    <string name="post_creation_success">Пост создан успешно</string>
+    <string name="feed_fetch_error">Ошибка загрузки фида</string>
+    <string name="like_performing">Проставляется лайк/дизлайк...</string>
+    <string name="like_error">Ошибка отправки лайка</string>
+    <string name="add_repost">Добавить репост</string>
 </resources>

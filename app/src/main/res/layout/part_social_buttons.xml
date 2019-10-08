@@ -28,50 +28,75 @@
         android:layout_marginEnd="@dimen/large_margin"
         android:minWidth="@dimen/mid_margin"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/imgComment"
+        app:layout_constraintEnd_toStartOf="@id/imgRepost"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="0" />
 
+<!--    <ImageButton-->
+<!--        android:id="@+id/imgComment"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/mid_margin"-->
+<!--        android:layout_marginEnd="@dimen/mid_margin"-->
+<!--        android:background="#ffffff"-->
+<!--        android:src="@drawable/ic_comment_inactive_24dp"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/txtComment"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_goneMarginEnd="@dimen/huge_margin"-->
+<!--        android:contentDescription="@string/empty" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txtComment"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/mid_margin"-->
+<!--        android:layout_marginEnd="@dimen/large_margin"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/imgShare"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:text="10" />-->
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/imgShare"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/mid_margin"-->
+<!--        android:layout_marginEnd="@dimen/mid_margin"-->
+<!--        android:background="#ffffff"-->
+<!--        android:src="@drawable/ic_share_inactive_24dp"-->
+<!--        app:layout_constraintEnd_toStartOf="@id/txtShare"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_goneMarginEnd="@dimen/large_margin"-->
+<!--        tools:text="share"-->
+<!--        android:contentDescription="@string/empty" />-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/txtShare"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/mid_margin"-->
+<!--        android:layout_marginEnd="@dimen/mid_margin"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:text="20" />-->
+
     <ImageButton
-        android:id="@+id/imgComment"
+        android:id="@+id/imgRepost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/mid_margin"
         android:layout_marginEnd="@dimen/mid_margin"
         android:background="#ffffff"
-        android:src="@drawable/ic_comment_inactive_24dp"
-        app:layout_constraintEnd_toStartOf="@id/txtComment"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_goneMarginEnd="@dimen/huge_margin"
-        android:contentDescription="@string/empty" />
-
-    <TextView
-        android:id="@+id/txtComment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/mid_margin"
-        android:layout_marginEnd="@dimen/large_margin"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@id/imgShare"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="10" />
-
-    <ImageButton
-        android:id="@+id/imgShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/mid_margin"
-        android:layout_marginEnd="@dimen/mid_margin"
-        android:background="#ffffff"
-        android:src="@drawable/ic_share_inactive_24dp"
-        app:layout_constraintEnd_toStartOf="@id/txtShare"
+        android:src="@drawable/ic_repost_inactive_24dp"
+        app:layout_constraintEnd_toStartOf="@id/txtRepost"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginEnd="@dimen/large_margin"
         tools:text="share"
         android:contentDescription="@string/empty" />
 
     <TextView
-        android:id="@+id/txtShare"
+        android:id="@+id/txtRepost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/mid_margin"

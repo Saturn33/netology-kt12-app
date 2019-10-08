@@ -1,4 +1,5 @@
 package ru.netology.saturn33.homework.hw10.adapter
+/*
 
 import android.content.Intent
 import android.net.Uri
@@ -6,7 +7,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.footer.view.*
 import kotlinx.android.synthetic.main.post_event.view.*
-import ru.netology.saturn33.homework.hw10.dto.Post
+import ru.netology.saturn33.homework.hw10.dto.PostModel
 
 class EventViewHolder(adapter: PostAdapter, itemView: View) : PostViewHolder(adapter, itemView) {
     init {
@@ -27,7 +28,7 @@ class EventViewHolder(adapter: PostAdapter, itemView: View) : PostViewHolder(ada
         }
     }
 
-    override fun bind(post: Post) {
+    override fun bind(post: PostModel) {
         super.bind(post)
         with(itemView) {
             imgLocation.visibility = View.VISIBLE
@@ -37,3 +38,4 @@ class EventViewHolder(adapter: PostAdapter, itemView: View) : PostViewHolder(ada
         }
     }
 }
+*/

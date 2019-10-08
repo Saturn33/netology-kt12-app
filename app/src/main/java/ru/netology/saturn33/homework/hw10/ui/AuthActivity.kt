@@ -3,13 +3,11 @@ package ru.netology.saturn33.homework.hw10.ui
 import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import io.ktor.util.KtorExperimentalAPI
 import kotlinx.android.synthetic.main.activity_auth.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.io.errors.IOException
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.startActivity
@@ -20,8 +18,8 @@ import ru.netology.saturn33.homework.hw10.R
 import ru.netology.saturn33.homework.hw10.Utils
 import ru.netology.saturn33.homework.hw10.dto.AuthenticationResponseDto
 import ru.netology.saturn33.homework.hw10.repositories.Repository
+import java.io.IOException
 
-@KtorExperimentalAPI
 class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     var authDialog: ProgressDialog? = null
     var job: Job? = null
@@ -35,7 +33,9 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         super.onStart()
         title = getString(R.string.title_enter)
 
-        if (Utils.isAuthenticated(this)) {
+        val token = Utils.getToken(this)
+        Repository.createRetrofit(token)
+        if (Utils.isAuthenticated(token)) {
             startActivity<FeedActivity>()
             finish()
         }
@@ -92,6 +92,7 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                 if (response?.isSuccessful == true) {
                     toast(getString(R.string.auth_success))
                     Utils.setUserAuth(this@AuthActivity, response.body()?.token ?: "")
+                    Repository.createRetrofit(response.body()?.token)
                     startActivity<FeedActivity>()
                     finish()
                 } else {

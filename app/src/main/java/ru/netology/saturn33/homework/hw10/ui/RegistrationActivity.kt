@@ -9,7 +9,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.io.errors.IOException
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
@@ -19,6 +18,7 @@ import ru.netology.saturn33.homework.hw10.R
 import ru.netology.saturn33.homework.hw10.Utils
 import ru.netology.saturn33.homework.hw10.dto.RegistrationResponseDto
 import ru.netology.saturn33.homework.hw10.repositories.Repository
+import java.io.IOException
 
 class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     var regDialog: ProgressDialog? = null
