@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="ru.netology.saturn33.homework.hw9">
+    package="ru.netology.saturn33.homework.hw10">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <application
@@ -14,13 +14,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".ui.RegistrationActivity"
+            android:name="ru.netology.saturn33.homework.hw10.ui.RegistrationActivity"
             android:label="@string/title_registration" />
         <activity
-            android:name=".ui.FeedActivity"
+            android:name="ru.netology.saturn33.homework.hw10.ui.FeedActivity"
             android:label="@string/title_main_screen" />
         <activity
-            android:name=".ui.AuthActivity">
+            android:name="ru.netology.saturn33.homework.hw10.ui.AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
