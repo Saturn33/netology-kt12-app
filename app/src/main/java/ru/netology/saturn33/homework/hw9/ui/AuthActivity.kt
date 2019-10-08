@@ -9,13 +9,16 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.io.errors.IOException
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.json.JSONObject
+import retrofit2.Response
 import ru.netology.saturn33.homework.hw9.R
 import ru.netology.saturn33.homework.hw9.Utils
+import ru.netology.saturn33.homework.hw9.dto.AuthenticationResponseDto
 import ru.netology.saturn33.homework.hw9.repositories.Repository
 
 @KtorExperimentalAPI
@@ -75,20 +78,25 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             }
 
             job = launch {
+                var response: Response<AuthenticationResponseDto>? = null
                 authDialog?.show()
-                val response = Repository.authenticate(
-                    login.text.toString(),
-                    password.text.toString()
-                )
+                try {
+                    response = Repository.authenticate(
+                        login.text.toString(),
+                        password.text.toString()
+                    )
+                } catch (e: IOException) {
+                    longToast(getString(R.string.unknown_auth_error))
+                }
                 authDialog?.hide()
-                if (response.isSuccessful) {
+                if (response?.isSuccessful == true) {
                     toast(getString(R.string.auth_success))
                     Utils.setUserAuth(this@AuthActivity, response.body()?.token ?: "")
                     startActivity<FeedActivity>()
                     finish()
                 } else {
                     try {
-                        val json = JSONObject(response.errorBody()?.string() ?: "")
+                        val json = JSONObject(response?.errorBody()?.string() ?: "")
                         login.error = json.get("error").toString()
                     } catch (e: Exception) {
                         longToast(getString(R.string.unknown_auth_error))

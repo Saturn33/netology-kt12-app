@@ -9,12 +9,15 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.io.errors.IOException
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.toast
 import org.json.JSONObject
+import retrofit2.Response
 import ru.netology.saturn33.homework.hw9.R
 import ru.netology.saturn33.homework.hw9.Utils
+import ru.netology.saturn33.homework.hw9.dto.RegistrationResponseDto
 import ru.netology.saturn33.homework.hw9.repositories.Repository
 
 class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() {
@@ -59,6 +62,7 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
             }
 
             job = launch {
+                var response: Response<RegistrationResponseDto>? = null
                 regDialog = indeterminateProgressDialog(
                     title = getString(R.string.registration),
                     message = getString(R.string.registration_attempt)
@@ -66,18 +70,23 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
                     setCancelable(false)
                     show()
                 }
-                val response = Repository.register(
-                    login.text.toString(),
-                    password.text.toString()
-                )
-                regDialog?.hide()
-                if (response.isSuccessful) {
+                try {
+                    response = Repository.register(
+                        login.text.toString(),
+                        password.text.toString()
+                    )
+                } catch (e: IOException) {
+                    longToast(getString(R.string.unknown_registration_error))
+                }
+
+            regDialog?.hide()
+                if (response?.isSuccessful == true) {
                     toast(getString(R.string.registration_success))
                     Utils.setUserAuth(this@RegistrationActivity, response.body()?.token ?: "")
                     finish()
                 } else {
                     try {
-                        val json = JSONObject(response.errorBody()?.string() ?: "")
+                        val json = JSONObject(response?.errorBody()?.string() ?: "")
                         login.error = json.get("error").toString()
                     } catch (e: Exception) {
                         longToast(getString(R.string.unknown_registration_error))
