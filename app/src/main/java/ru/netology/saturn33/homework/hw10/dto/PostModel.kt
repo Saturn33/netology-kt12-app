@@ -3,7 +3,9 @@ package ru.netology.saturn33.homework.hw10.dto
 import java.util.*
 
 enum class PostType {
-    POST, REPOST//, EVENT, YOUTUBE, AD
+    POST, REPOST,//, EVENT, YOUTUBE, AD
+
+    HEADER, FOOTER
 }
 
 class PostModel(

@@ -48,7 +48,7 @@ class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         job = launch {
             feedDialog?.show()
             try {
-                val result = Repository.getPosts()
+                val result = Repository.getRecentPosts()
                 if (result.isSuccessful) {
                     with(container) {
                         layoutManager = LinearLayoutManager(this@FeedActivity)

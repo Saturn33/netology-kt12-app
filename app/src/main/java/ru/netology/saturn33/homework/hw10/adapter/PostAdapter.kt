@@ -9,15 +9,18 @@ import ru.netology.saturn33.homework.hw10.dto.PostType
 
 val viewTypeToPostType = mapOf<Int, PostType>(
     1 to PostType.POST,
-    2 to PostType.REPOST
+    2 to PostType.REPOST,
 /*
     3 to PostType.YOUTUBE,
     4 to PostType.EVENT,
     5 to PostType.AD
 */
+    (-1) to PostType.HEADER,
+    (-2) to PostType.FOOTER
 )
 
-class PostAdapter(val list: MutableList<PostModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PostAdapter(val list: MutableList<PostModel>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewTypeToPostType[viewType]) {
             PostType.POST -> PostViewHolder(
@@ -46,18 +49,41 @@ class PostAdapter(val list: MutableList<PostModel>) : RecyclerView.Adapter<Recyc
                     false
                 )
             )
+            PostType.HEADER -> HeaderViewHolder(
+                this,
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.item_load_new,
+                    parent,
+                    false
+                )
+            )
+            PostType.FOOTER -> FooterViewHolder(
+                this,
+                LayoutInflater.from(parent.context).inflate(
+                    R.layout.item_load_more,
+                    parent,
+                    false
+                )
+            )
             null -> TODO("bad view type")
         }
 
-    override fun getItemCount() = list.size
+    override fun getItemCount() = list.size + 2
 
     override fun getItemViewType(position: Int): Int {
-        return viewTypeToPostType.filterValues { list[position].postType == it }.keys.first()
+        return when {
+            position == 0 -> viewTypeToPostType.filterValues { PostType.HEADER == it }.keys.first()
+            position == list.size + 1 -> viewTypeToPostType.filterValues { PostType.FOOTER == it }.keys.first()
+            //TODO remove -1 when swipetorefresh
+            else -> viewTypeToPostType.filterValues { list[position - 1].postType == it }.keys.first()
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        with(holder as BaseViewHolder) {
-            bind(list[position])
-        }
+        if (holder is BaseViewHolder)
+            with(holder) {
+                //TODO remove -1 when swipetorefresh
+                bind(list[position - 1])
+            }
     }
 }

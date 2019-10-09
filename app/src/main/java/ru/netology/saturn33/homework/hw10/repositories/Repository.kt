@@ -5,6 +5,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.netology.saturn33.homework.hw10.API_BASE_URL
+import ru.netology.saturn33.homework.hw10.PAGE_SIZE
 import ru.netology.saturn33.homework.hw10.client.InjectAuthTokenInterceptor
 import ru.netology.saturn33.homework.hw10.client.RAPI
 import ru.netology.saturn33.homework.hw10.dto.AuthenticationRequestDto
@@ -59,6 +60,12 @@ object Repository {
     )
 
     suspend fun getPosts() = API.getPosts()
+
+    suspend fun getRecentPosts() = API.getRecentPosts(PAGE_SIZE)
+
+    suspend fun getPostsAfter(id: Long) = API.getPostsAfter(id)
+
+    suspend fun getPostsBefore(id: Long) = API.getPostsBefore(id, PAGE_SIZE)
 
     suspend fun like(id: Long) = API.like(id)
 

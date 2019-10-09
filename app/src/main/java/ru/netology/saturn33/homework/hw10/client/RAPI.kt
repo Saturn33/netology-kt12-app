@@ -17,6 +17,17 @@ interface RAPI {
     @GET("posts")
     suspend fun getPosts(): Response<MutableList<PostModel>>
 
+    @GET("posts/recent/{count}")
+    suspend fun getRecentPosts(@Path("count") count: Long): Response<MutableList<PostModel>>
+
+    //все новые посты
+    @GET("posts/after/{id}")
+    suspend fun getPostsAfter(@Path("id") postId: Long): Response<MutableList<PostModel>>
+
+    //старые посты порциями
+    @GET("posts/before/{id}/{count}")
+    suspend fun getPostsBefore(@Path("id") postId: Long, @Path("count") count: Long): Response<MutableList<PostModel>>
+
     @POST("posts/{id}/like")
     suspend fun like(@Path("id") id: Long): Response<PostModel>
 

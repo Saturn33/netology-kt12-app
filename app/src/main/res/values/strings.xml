@@ -40,4 +40,8 @@
     <string name="repost_performing">Создаётся репост…</string>
     <string name="repost_error">Ошибка при создании репоста</string>
     <string name="repost_success">Репост добавлен, обновите ленту</string>
+    <string name="load_new_posts">Загрузить свежие посты</string>
+    <string name="load_more">Загрузить ещё</string>
+    <string name="update_error">Ошибка обновления</string>
+    <string name="no_more_posts">Нет больше постов</string>
 </resources>
