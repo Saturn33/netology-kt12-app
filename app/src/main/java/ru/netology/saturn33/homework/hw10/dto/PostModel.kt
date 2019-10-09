@@ -4,8 +4,7 @@ import java.util.*
 
 enum class PostType {
     POST, REPOST,//, EVENT, YOUTUBE, AD
-
-    HEADER, FOOTER
+    FOOTER
 }
 
 class PostModel(

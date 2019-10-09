@@ -7,10 +7,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -61,6 +58,34 @@ class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             }
             feedDialog?.hide()
         }
+
+        swipeContainer.setOnRefreshListener {
+            if (container.adapter is PostAdapter) {
+                GlobalScope.launch(Dispatchers.Main) {
+                    try {
+                        val response =
+                            Repository.getPostsAfter(if ((container.adapter as PostAdapter).list.isEmpty()) 0 else (container.adapter as PostAdapter).list.first().id)
+
+                        if (response.isSuccessful) {
+                            val newItems = response.body()!!
+                            if (newItems.size > 0) {
+                                (container.adapter as PostAdapter).list.addAll(0, newItems)
+                                (container.adapter as PostAdapter).notifyItemRangeInserted(
+                                    0,
+                                    newItems.size
+                                )
+                            }
+                        } else {
+                            toast(getString(R.string.update_error))
+                        }
+                    } catch (e: IOException) {
+                        toast(getString(R.string.feed_fetch_error))
+                    }
+                    swipeContainer.isRefreshing = false
+                }
+            }
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

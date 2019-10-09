@@ -15,7 +15,6 @@ val viewTypeToPostType = mapOf<Int, PostType>(
     4 to PostType.EVENT,
     5 to PostType.AD
 */
-    (-1) to PostType.HEADER,
     (-2) to PostType.FOOTER
 )
 
@@ -49,14 +48,6 @@ class PostAdapter(val list: MutableList<PostModel>) :
                     false
                 )
             )
-            PostType.HEADER -> HeaderViewHolder(
-                this,
-                LayoutInflater.from(parent.context).inflate(
-                    R.layout.item_load_new,
-                    parent,
-                    false
-                )
-            )
             PostType.FOOTER -> FooterViewHolder(
                 this,
                 LayoutInflater.from(parent.context).inflate(
@@ -68,22 +59,19 @@ class PostAdapter(val list: MutableList<PostModel>) :
             null -> TODO("bad view type")
         }
 
-    override fun getItemCount() = list.size + 2
+    override fun getItemCount() = list.size + 1
 
     override fun getItemViewType(position: Int): Int {
         return when {
-            position == 0 -> viewTypeToPostType.filterValues { PostType.HEADER == it }.keys.first()
-            position == list.size + 1 -> viewTypeToPostType.filterValues { PostType.FOOTER == it }.keys.first()
-            //TODO remove -1 when swipetorefresh
-            else -> viewTypeToPostType.filterValues { list[position - 1].postType == it }.keys.first()
+            position == list.size -> viewTypeToPostType.filterValues { PostType.FOOTER == it }.keys.first()
+            else -> viewTypeToPostType.filterValues { list[position].postType == it }.keys.first()
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is BaseViewHolder)
             with(holder) {
-                //TODO remove -1 when swipetorefresh
-                bind(list[position - 1])
+                bind(list[position])
             }
     }
 }

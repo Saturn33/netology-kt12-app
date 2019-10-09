@@ -26,8 +26,7 @@ open class PostViewHolder(adapter: PostAdapter, itemView: View) :
             imgLike.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     val currentPosition = adapterPosition
-                    //TODO remove -1 when swipetorefresh
-                    val item = adapter.list[adapterPosition - 1]
+                    val item = adapter.list[adapterPosition]
                     if (item.likeActionPerforming) {
                         context.toast(context.getString(R.string.like_performing))
                     } else {
@@ -55,8 +54,7 @@ open class PostViewHolder(adapter: PostAdapter, itemView: View) :
             imgRepost.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     val currentPosition = adapterPosition
-                    //TODO remove -1 when swipetorefresh
-                    val item = adapter.list[adapterPosition - 1]
+                    val item = adapter.list[adapterPosition]
                     showDialog(context, item.id) {
                         if (item.repostActionPerforming) {
                             context.toast(context.getString(R.string.repost_performing))
