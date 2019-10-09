@@ -3,6 +3,7 @@ package ru.netology.saturn33.homework.hw10.ui
 import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_create_post.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -18,8 +19,19 @@ class CreatePostActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     var postDialog: ProgressDialog? = null
     var job: Job? = null
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == android.R.id.home) {
+            finish()
+            true
+        }
+        else {
+            return super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         postDialog = indeterminateProgressDialog(
             title = "Новый пост",
             message = "Создание поста"
