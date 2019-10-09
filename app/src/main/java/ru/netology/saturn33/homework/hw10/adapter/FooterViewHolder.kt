@@ -28,6 +28,8 @@ class FooterViewHolder(val adapter: PostAdapter, itemView: View) :
 
                         if (response.isSuccessful) {
                             val newItems = response.body()!!
+                            progressBarMore.isVisible = false
+                            btnLoadMore.isEnabled = true
                             if (newItems.size > 0) {
                                 val oldLastIndex = adapter.list.lastIndex
                                 adapter.list.addAll(newItems)
@@ -43,9 +45,9 @@ class FooterViewHolder(val adapter: PostAdapter, itemView: View) :
                         }
                     } catch (e: IOException) {
                         context.toast(context.getString(R.string.feed_fetch_error))
+                        progressBarMore.isVisible = false
+                        btnLoadMore.isEnabled = true
                     }
-                    progressBarMore.isVisible = false
-                    btnLoadMore.isEnabled = true
                 }
             }
         }
