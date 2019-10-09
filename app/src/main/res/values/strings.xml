@@ -33,7 +33,11 @@
     <string name="post_creation_error">Ошибка создания поста</string>
     <string name="post_creation_success">Пост создан успешно</string>
     <string name="feed_fetch_error">Ошибка загрузки фида</string>
-    <string name="like_performing">Проставляется лайк/дизлайк...</string>
+    <string name="like_performing">Проставляется лайк/дизлайк…</string>
     <string name="like_error">Ошибка отправки лайка</string>
     <string name="add_repost">Добавить репост</string>
+    <string name="enter_repost_text">Введите текст репоста</string>
+    <string name="repost_performing">Создаётся репост…</string>
+    <string name="repost_error">Ошибка при создании репоста</string>
+    <string name="repost_success">Репост добавлен, обновите ленту</string>
 </resources>

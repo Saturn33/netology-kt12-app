@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/mid_margin"
     tools:context=".ui.CreatePostActivity">
 
     <com.google.android.material.textfield.TextInputLayout
@@ -18,8 +19,9 @@
             android:id="@+id/postContent"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/enter_post_text"
-            android:inputType="textMultiLine" />
+            android:hint="@string/enter_repost_text"
+            android:inputType="textMultiLine"
+            android:minHeight="250dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

@@ -1,21 +1,21 @@
 package ru.netology.saturn33.homework.hw10.adapter
 
-import android.content.Intent
+import android.content.Context
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_create_repost.*
 import kotlinx.android.synthetic.main.footer.view.*
 import kotlinx.android.synthetic.main.part_main_content.view.*
 import kotlinx.android.synthetic.main.part_social_buttons.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import ru.netology.saturn33.homework.hw10.R
 import ru.netology.saturn33.homework.hw10.Utils
 import ru.netology.saturn33.homework.hw10.dto.PostModel
 import ru.netology.saturn33.homework.hw10.repositories.Repository
-import ru.netology.saturn33.homework.hw10.ui.CreateRepostActivity
 import java.io.IOException
 import java.util.*
 
@@ -29,8 +29,7 @@ open class PostViewHolder(adapter: PostAdapter, itemView: View) :
                     val item = adapter.list[adapterPosition]
                     if (item.likeActionPerforming) {
                         context.toast(context.getString(R.string.like_performing))
-                    }
-                    else {
+                    } else {
                         GlobalScope.launch(Dispatchers.Main) {
                             try {
                                 item.likeActionPerforming = true
@@ -43,20 +42,41 @@ open class PostViewHolder(adapter: PostAdapter, itemView: View) :
                                 if (response.isSuccessful) {
                                     item.updatePost(response.body()!!)
                                 }
-                                adapter.notifyItemChanged(currentPosition)
-                            }
-                            catch (e: IOException) {
+                            } catch (e: IOException) {
                                 context.toast(context.getString(R.string.like_error))
                             }
                             item.likeActionPerforming = false
+                            adapter.notifyItemChanged(currentPosition)
                         }
                     }
                 }
             }
             imgRepost.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
+                    val currentPosition = adapterPosition
                     val item = adapter.list[adapterPosition]
-                    context.startActivity<CreateRepostActivity>("postId" to item.id)
+                    showDialog(context, item.id) {
+                        if (item.repostActionPerforming) {
+                            context.toast(context.getString(R.string.repost_performing))
+                        } else {
+                            GlobalScope.launch(Dispatchers.Main) {
+                                try {
+                                    item.repostActionPerforming = true
+                                    adapter.notifyItemChanged(currentPosition)
+                                    val result = Repository.createRepost(item.id, it)
+                                    if (result.isSuccessful) {
+                                        context.toast(context.getString(R.string.repost_success))
+                                    } else {
+                                        context.toast(context.getString(R.string.repost_error))
+                                    }
+                                } catch (e: IOException) {
+                                    context.toast(context.getString(R.string.repost_error))
+                                }
+                                item.repostActionPerforming = false
+                                adapter.notifyItemChanged(currentPosition)
+                            }
+                        }
+                    }
                 }
             }
             /*
@@ -101,13 +121,25 @@ open class PostViewHolder(adapter: PostAdapter, itemView: View) :
             content.text = post.content
 
             updateInfo(
-                imgLike, txtLike, post.likedByMe, post.likes,
-                R.drawable.ic_like_active_24dp, R.drawable.ic_like_inactive_24dp, post.likeActionPerforming, R.drawable.ic_like_pending_24dp
+                imgLike,
+                txtLike,
+                post.likedByMe,
+                post.likes,
+                R.drawable.ic_like_active_24dp,
+                R.drawable.ic_like_inactive_24dp,
+                post.likeActionPerforming,
+                R.drawable.ic_like_pending_24dp
             )
 
             updateInfo(
-                imgRepost, txtRepost, post.repostedByMe, post.reposts,
-                R.drawable.ic_repost_active_24dp, R.drawable.ic_repost_inactive_24dp, post.repostActionPerforming, R.drawable.ic_repost_pending_24dp
+                imgRepost,
+                txtRepost,
+                post.repostedByMe,
+                post.reposts,
+                R.drawable.ic_repost_active_24dp,
+                R.drawable.ic_repost_inactive_24dp,
+                post.repostActionPerforming,
+                R.drawable.ic_repost_pending_24dp
             )
 /*
 
@@ -123,6 +155,17 @@ open class PostViewHolder(adapter: PostAdapter, itemView: View) :
 
 */
 //            imgLocation.visibility = View.GONE
+        }
+    }
+
+    fun showDialog(context: Context, postId: Long, createBtnClicked: (content: String) -> Unit) {
+        val dialog = AlertDialog.Builder(context)
+            .setView(R.layout.activity_create_repost)
+            .setTitle("Создание репоста (пост #$postId)")
+            .show()
+        dialog.addPost.setOnClickListener {
+            createBtnClicked(dialog.postContent.text.toString())
+            dialog.dismiss()
         }
     }
 }
