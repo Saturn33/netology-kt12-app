@@ -109,6 +109,6 @@ class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onDestroy() {
         super.onDestroy()
         job?.cancel()
-        feedDialog?.hide()
+        feedDialog?.dismiss()
     }
 }

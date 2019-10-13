@@ -119,6 +119,6 @@ class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onStop() {
         super.onStop()
         job?.cancel()
-        authDialog?.hide()
+        authDialog?.dismiss()
     }
 }

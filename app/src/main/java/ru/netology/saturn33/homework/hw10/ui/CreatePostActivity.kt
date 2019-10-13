@@ -80,6 +80,6 @@ class CreatePostActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onDestroy() {
         super.onDestroy()
         job?.cancel()
-        postDialog?.hide()
+        postDialog?.dismiss()
     }
 }

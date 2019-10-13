@@ -99,7 +99,7 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
     override fun onStop() {
         super.onStop()
         job?.cancel()
-        regDialog?.hide()
+        regDialog?.dismiss()
     }
 
 }
