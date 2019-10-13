@@ -24,6 +24,14 @@ android {
     packagingOptions {
         exclude 'META-INF/*.kotlin_module'
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 ext.anko_version = '0.10.8'
@@ -42,6 +50,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:4.2.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
+    implementation "androidx.work:work-runtime-ktx:2.2.0"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

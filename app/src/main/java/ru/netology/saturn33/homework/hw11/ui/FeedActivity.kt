@@ -6,18 +6,20 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
-import ru.netology.saturn33.homework.hw11.NotificationHelper
-import ru.netology.saturn33.homework.hw11.R
-import ru.netology.saturn33.homework.hw11.Utils
+import ru.netology.saturn33.homework.hw11.*
 import ru.netology.saturn33.homework.hw11.adapter.PostAdapter
 import ru.netology.saturn33.homework.hw11.dto.PostModel
 import ru.netology.saturn33.homework.hw11.repositories.Repository
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     private var feedDialog: ProgressDialog? = null
@@ -26,10 +28,24 @@ class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        scheduleJob()
 
         fab.setOnClickListener {
             startActivity<CreatePostActivity>()
         }
+    }
+
+    private fun scheduleJob() {
+        val checkWork = PeriodicWorkRequestBuilder<UserNotHereWorker>(
+            SHOW_NOTIFICATION_AFTER_UNVISITED_MS, TimeUnit.MILLISECONDS
+        )
+            .build()
+        WorkManager.getInstance(this)
+            .enqueueUniquePeriodicWork(
+                "user_present_work",
+                ExistingPeriodicWorkPolicy.KEEP,
+                checkWork
+            )
     }
 
     override fun onStart() {
@@ -107,13 +123,17 @@ class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        feedDialog?.dismiss()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         job?.cancel()
-        feedDialog?.dismiss()
         if (Utils.isFirstTime(this)) {
             NotificationHelper.comeBackNotification(this)
-            Utils.setNotFirstTime(this)
         }
+        Utils.setLastVisitTime(this, System.currentTimeMillis())
     }
 }
