@@ -18,8 +18,8 @@ class PostModel(
 //    var shares: Int = 0,
 //    var sharedByMe: Boolean = false,
 //    val link: String? = null,//for ad
-    val postType: PostType = PostType.POST
-//    val attachment: AttachmentModel?
+    val postType: PostType = PostType.POST,
+    val attachment: AttachmentModel? = null
 )
 {
     var likeActionPerforming = false

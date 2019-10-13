@@ -19,8 +19,8 @@ import ru.netology.saturn33.homework.hw11.repositories.Repository
 import java.io.IOException
 
 class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
-    var feedDialog: ProgressDialog? = null
-    var job: Job? = null
+    private var feedDialog: ProgressDialog? = null
+    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

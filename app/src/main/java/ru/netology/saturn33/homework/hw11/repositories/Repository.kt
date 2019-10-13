@@ -1,26 +1,33 @@
 package ru.netology.saturn33.homework.hw11.repositories
 
+import android.graphics.Bitmap
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.netology.saturn33.homework.hw11.API_BASE_URL
 import ru.netology.saturn33.homework.hw11.PAGE_SIZE
 import ru.netology.saturn33.homework.hw11.client.InjectAuthTokenInterceptor
 import ru.netology.saturn33.homework.hw11.client.RAPI
+import ru.netology.saturn33.homework.hw11.dto.AttachmentModel
 import ru.netology.saturn33.homework.hw11.dto.AuthenticationRequestDto
 import ru.netology.saturn33.homework.hw11.dto.PostRequestDto
 import ru.netology.saturn33.homework.hw11.dto.RegistrationRequestDto
+import java.io.ByteArrayOutputStream
 
 object Repository {
     private var retrofit: Retrofit = createRetrofit(returnInstance = true)
-//        Retrofit.Builder()
+    //        Retrofit.Builder()
 //            .baseUrl(API_BASE_URL)
 //            .addConverterFactory(GsonConverterFactory.create())
 //            .build()
     private var API: RAPI = retrofit.create(RAPI::class.java)
 
-    fun createRetrofit(authToken: String? = null, returnInstance: Boolean = false) : Retrofit {
+    fun createRetrofit(authToken: String? = null, returnInstance: Boolean = false): Retrofit {
         val httpLoggerInterceptor = HttpLoggingInterceptor()
         httpLoggerInterceptor.level = HttpLoggingInterceptor.Level.BODY
         val clientBuilder = OkHttpClient.Builder()
@@ -50,8 +57,8 @@ object Repository {
         RegistrationRequestDto(login, password)
     )
 
-    suspend fun createPost(content: String?) = API.createPost(
-        PostRequestDto(content = content)
+    suspend fun createPost(content: String?, attachment: AttachmentModel?) = API.createPost(
+        PostRequestDto(content = content, attachment = attachment)
     )
 
     suspend fun createRepost(postId: Long, content: String?) = API.createRepost(
@@ -72,4 +79,12 @@ object Repository {
     suspend fun dislike(id: Long) = API.dislike(id)
 
     suspend fun me() = API.me()
+
+    suspend fun upload(bitmap: Bitmap): Response<AttachmentModel> {
+        val bos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos)
+        val reqFile = bos.toByteArray().toRequestBody("image/jpeg".toMediaTypeOrNull())
+        val body = MultipartBody.Part.createFormData("file", "image.jpg", reqFile)
+        return API.uploadImage(body)
+    }
 }

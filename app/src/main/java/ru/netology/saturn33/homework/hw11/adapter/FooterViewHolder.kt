@@ -13,7 +13,7 @@ import ru.netology.saturn33.homework.hw11.R
 import ru.netology.saturn33.homework.hw11.repositories.Repository
 import java.io.IOException
 
-class FooterViewHolder(val adapter: PostAdapter, itemView: View) :
+class FooterViewHolder(private val adapter: PostAdapter, itemView: View) :
     RecyclerView.ViewHolder(itemView) {
 
     init {

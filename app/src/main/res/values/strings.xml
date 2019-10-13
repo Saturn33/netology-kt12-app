@@ -44,4 +44,11 @@
     <string name="load_more">Загрузить ещё</string>
     <string name="update_error">Ошибка обновления</string>
     <string name="no_more_posts">Нет больше постов</string>
+    <string name="add_image">add image</string>
+    <string name="post_image">post image</string>
+    <string name="new_post">Новый пост</string>
+    <string name="new_post_creating">Создание поста</string>
+    <string name="uploading_title">Загрузка изображения</string>
+    <string name="uploading_content">Отправляем изображение на сервер</string>
+    <string name="error_uploading">Ошибка отправки изображения на сервер</string>
 </resources>

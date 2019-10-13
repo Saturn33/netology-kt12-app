@@ -21,8 +21,8 @@ import ru.netology.saturn33.homework.hw11.repositories.Repository
 import java.io.IOException
 
 class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() {
-    var regDialog: ProgressDialog? = null
-    var job: Job? = null
+    private var regDialog: ProgressDialog? = null
+    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

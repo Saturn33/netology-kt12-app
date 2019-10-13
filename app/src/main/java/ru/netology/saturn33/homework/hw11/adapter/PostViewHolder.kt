@@ -2,8 +2,10 @@ package ru.netology.saturn33.homework.hw11.adapter
 
 import android.content.Context
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_create_repost.*
 import kotlinx.android.synthetic.main.footer.view.*
 import kotlinx.android.synthetic.main.part_main_content.view.*
@@ -14,6 +16,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.anko.toast
 import ru.netology.saturn33.homework.hw11.R
 import ru.netology.saturn33.homework.hw11.Utils
+import ru.netology.saturn33.homework.hw11.dto.AttachmentType
 import ru.netology.saturn33.homework.hw11.dto.PostModel
 import ru.netology.saturn33.homework.hw11.repositories.Repository
 import java.io.IOException
@@ -143,6 +146,12 @@ open class PostViewHolder(adapter: PostAdapter, itemView: View) :
                 post.repostActionPerforming,
                 R.drawable.ic_repost_pending_24dp
             )
+
+            when (post.attachment?.mediaType) {
+                AttachmentType.IMAGE -> loadImage(photoImg, post.attachment.url)
+                null -> {}
+                else -> TODO("Not implemented yet")
+            }
 /*
 
             updateInfo(
@@ -160,7 +169,13 @@ open class PostViewHolder(adapter: PostAdapter, itemView: View) :
         }
     }
 
-    fun showDialog(context: Context, postId: Long, createBtnClicked: (content: String) -> Unit) {
+    private fun loadImage(photoImg: ImageView, url: String) {
+        Glide.with(photoImg.context)
+            .load(url)
+            .into(photoImg)
+    }
+
+    private fun showDialog(context: Context, postId: Long, createBtnClicked: (content: String) -> Unit) {
         val dialog = AlertDialog.Builder(context)
             .setView(R.layout.activity_create_repost)
             .setTitle("Создание репоста (пост #$postId)")

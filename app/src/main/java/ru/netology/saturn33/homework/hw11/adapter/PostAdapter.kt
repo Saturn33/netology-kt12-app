@@ -62,8 +62,8 @@ class PostAdapter(val list: MutableList<PostModel>) :
     override fun getItemCount() = list.size + 1
 
     override fun getItemViewType(position: Int): Int {
-        return when {
-            position == list.size -> viewTypeToPostType.filterValues { PostType.FOOTER == it }.keys.first()
+        return when (position) {
+            list.size -> viewTypeToPostType.filterValues { PostType.FOOTER == it }.keys.first()
             else -> viewTypeToPostType.filterValues { list[position].postType == it }.keys.first()
         }
     }

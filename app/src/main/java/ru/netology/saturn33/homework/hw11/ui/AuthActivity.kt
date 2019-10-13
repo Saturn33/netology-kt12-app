@@ -21,8 +21,8 @@ import ru.netology.saturn33.homework.hw11.repositories.Repository
 import java.io.IOException
 
 class AuthActivity : AppCompatActivity(), CoroutineScope by MainScope() {
-    var authDialog: ProgressDialog? = null
-    var job: Job? = null
+    private var authDialog: ProgressDialog? = null
+    private var job: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

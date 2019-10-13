@@ -1,5 +1,7 @@
 package ru.netology.saturn33.homework.hw11.dto
 
+import ru.netology.saturn33.homework.hw11.API_BASE_URL
+
 enum class AttachmentType {
     IMAGE,
     AUDIO,
@@ -8,6 +10,8 @@ enum class AttachmentType {
 
 data class AttachmentModel(
     val id: String,
-    val url: String,
-    val type: AttachmentType
-)
+    val mediaType: AttachmentType
+) {
+    val url
+        get() = "${API_BASE_URL}static/$id"
+}

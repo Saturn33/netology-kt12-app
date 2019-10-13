@@ -4,7 +4,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import ru.netology.saturn33.homework.hw11.AUTH_TOKEN_HEADER
 
-class InjectAuthTokenInterceptor(val authToken: String) : Interceptor {
+class InjectAuthTokenInterceptor(private val authToken: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val originalRequest = chain.request()
         val requestWithToken = originalRequest.newBuilder()

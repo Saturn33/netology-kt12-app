@@ -1,5 +1,6 @@
 package ru.netology.saturn33.homework.hw11.client
 
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.*
 import ru.netology.saturn33.homework.hw11.dto.*
@@ -40,4 +41,8 @@ interface RAPI {
 
     @GET("me")
     suspend fun me(): Response<UserResponseDto>
+
+    @Multipart
+    @POST("media")
+    suspend fun uploadImage(@Part file: MultipartBody.Part): Response<AttachmentModel>
 }
