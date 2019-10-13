@@ -11,6 +11,7 @@ import kotlinx.coroutines.*
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import ru.netology.saturn33.homework.hw11.NotificationHelper
 import ru.netology.saturn33.homework.hw11.R
 import ru.netology.saturn33.homework.hw11.Utils
 import ru.netology.saturn33.homework.hw11.adapter.PostAdapter
@@ -110,5 +111,9 @@ class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         super.onDestroy()
         job?.cancel()
         feedDialog?.dismiss()
+        if (Utils.isFirstTime(this)) {
+            NotificationHelper.comeBackNotification(this)
+            Utils.setNotFirstTime(this)
+        }
     }
 }

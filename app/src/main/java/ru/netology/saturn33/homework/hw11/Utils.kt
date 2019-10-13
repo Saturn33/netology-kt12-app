@@ -1,11 +1,12 @@
 package ru.netology.saturn33.homework.hw11
 
 import android.content.Context
+import androidx.core.content.edit
 import ru.netology.saturn33.homework.hw11.dto.PostModel
 import kotlin.math.min
 
 object Utils {
-    fun publishedAgo(seconds: Long) : String {
+    fun publishedAgo(seconds: Long): String {
         return when (seconds) {
             in Long.MIN_VALUE until 0 -> "неправильное время"
             in 0 until 5 * Intervals.SECOND.seconds -> "только что"
@@ -54,18 +55,28 @@ object Utils {
     }
 
     fun removeUserAuth(ctx: Context) =
-        ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit().remove(
-            AUTHENTICATED_SHARED_KEY
-        ).commit()
+        ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit {
+            remove(AUTHENTICATED_SHARED_KEY)
+        }
+
 
     fun setUserAuth(ctx: Context, token: String) =
-        ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit().putString(
-            AUTHENTICATED_SHARED_KEY,
-            token
-        ).commit()
+        ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit {
+            putString(AUTHENTICATED_SHARED_KEY, token)
+        }
 
-    fun getToken(ctx: Context) = ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).getString(AUTHENTICATED_SHARED_KEY,null)
+    fun getToken(ctx: Context) =
+        ctx.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE)
+            .getString(AUTHENTICATED_SHARED_KEY, null)
 
     fun isAuthenticated(token: String?) = token?.isNotEmpty() ?: false
 
+    fun isFirstTime(context: Context) =
+        context.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE)
+            .getBoolean(FIRST_TIME_SHARED_KEY, true)
+
+    fun setNotFirstTime(context: Context) =
+        context.getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE).edit {
+            putBoolean(FIRST_TIME_SHARED_KEY, false)
+        }
 }
