@@ -13,10 +13,7 @@ import ru.netology.saturn33.homework.hw12.API_BASE_URL
 import ru.netology.saturn33.homework.hw12.PAGE_SIZE
 import ru.netology.saturn33.homework.hw12.client.InjectAuthTokenInterceptor
 import ru.netology.saturn33.homework.hw12.client.RAPI
-import ru.netology.saturn33.homework.hw12.dto.AttachmentModel
-import ru.netology.saturn33.homework.hw12.dto.AuthenticationRequestDto
-import ru.netology.saturn33.homework.hw12.dto.PostRequestDto
-import ru.netology.saturn33.homework.hw12.dto.RegistrationRequestDto
+import ru.netology.saturn33.homework.hw12.dto.*
 import java.io.ByteArrayOutputStream
 
 object Repository {
@@ -77,6 +74,8 @@ object Repository {
     suspend fun like(id: Long) = API.like(id)
 
     suspend fun dislike(id: Long) = API.dislike(id)
+
+    suspend fun registerPushToken(token: String) = API.registerPushToken(PushRequestParamsDto(token))
 
     suspend fun me() = API.me()
 

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "565965067962",
+    "firebase_url": "https://netology-kt12.firebaseio.com",
+    "project_id": "netology-kt12",
+    "storage_bucket": "netology-kt12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565965067962:android:b72c4c75581cf332c59483",
+        "android_client_info": {
+          "package_name": "ru.netology.saturn33.homework.hw12"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565965067962-vho9to808v3ecuuvjg4dcvd91dq6t0tu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXJ39aqcA6glwSl9CbJO-1Jkjt5nQcXyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565965067962-vho9to808v3ecuuvjg4dcvd91dq6t0tu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

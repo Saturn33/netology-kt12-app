@@ -13,6 +13,7 @@ import ru.netology.saturn33.homework.hw12.ui.FeedActivity
 object NotificationHelper {
     private val COMEBACK_NOTIFY_ID = 0
     private val RETURN_NOTIFY_ID = 1
+    private val SIMPLE_NOTIFY_ID = 2
     private val COMEBACK_CHANNEL_ID = "comeback_chanel_id"
     private var channelCreated = false
     private fun createNotificationChannel(context: Context) {
@@ -70,4 +71,18 @@ object NotificationHelper {
         }
         NotificationManagerCompat.from(context).notify(RETURN_NOTIFY_ID, builder.build())
     }
+
+    fun simpleNotification(context: Context, title: String, text: String) {
+        createNotificationChannelIfNotCreated(context)
+        val builder = NotificationCompat.Builder(context, COMEBACK_CHANNEL_ID)
+            .setSmallIcon(R.mipmap.ic_launcher_round).setContentTitle(title)
+            .setContentText(text)
+            .setStyle(NotificationCompat.BigTextStyle())
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            builder.priority = NotificationManager.IMPORTANCE_HIGH
+        }
+        NotificationManagerCompat.from(context).notify(SIMPLE_NOTIFY_ID, builder.build())
+    }
+
 }

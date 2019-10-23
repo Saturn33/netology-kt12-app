@@ -51,4 +51,5 @@
     <string name="uploading_title">Загрузка изображения</string>
     <string name="uploading_content">Отправляем изображение на сервер</string>
     <string name="error_uploading">Ошибка отправки изображения на сервер</string>
+    <string name="googleplay_services_unavailable">GooglePlay Services недоступны</string>
 </resources>

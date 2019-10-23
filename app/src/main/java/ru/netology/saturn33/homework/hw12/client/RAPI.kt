@@ -38,6 +38,8 @@ interface RAPI {
     @POST("posts/{id}/repost")
     suspend fun createRepost(@Path("id") postId: Long, @Body createPostRequest: PostRequestDto): Response<Void>
 
+    @POST("token")
+    suspend fun registerPushToken(@Body params: PushRequestParamsDto): Response<Void>
 
     @GET("me")
     suspend fun me(): Response<UserResponseDto>
