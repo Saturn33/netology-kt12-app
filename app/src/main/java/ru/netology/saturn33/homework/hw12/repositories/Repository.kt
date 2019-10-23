@@ -77,7 +77,7 @@ object Repository {
 
     suspend fun registerPushToken(token: String) = API.registerPushToken(PushRequestParamsDto(token))
 
-    suspend fun unregisterPushToken() = API.unregisterPushToken()
+    suspend fun unregisterPushToken(id: Long) = API.unregisterPushToken(id)
 
     suspend fun me() = API.me()
 
