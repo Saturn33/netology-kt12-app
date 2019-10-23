@@ -41,6 +41,9 @@ interface RAPI {
     @POST("token")
     suspend fun registerPushToken(@Body params: PushRequestParamsDto): Response<Void>
 
+    @DELETE("token")
+    suspend fun unregisterPushToken(): Response<Void>
+
     @GET("me")
     suspend fun me(): Response<UserResponseDto>
 

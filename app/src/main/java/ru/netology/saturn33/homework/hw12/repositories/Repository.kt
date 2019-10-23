@@ -77,6 +77,8 @@ object Repository {
 
     suspend fun registerPushToken(token: String) = API.registerPushToken(PushRequestParamsDto(token))
 
+    suspend fun unregisterPushToken() = API.unregisterPushToken()
+
     suspend fun me() = API.me()
 
     suspend fun upload(bitmap: Bitmap): Response<AttachmentModel> {
